@@ -1,0 +1,889 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bi_employee_travel_managment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-29 22:40+0000\n"
+"PO-Revision-Date: 2025-07-29 22:40+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<b>Accounting Info</b>"
+msgstr "<b>Información Contable</b>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<b>Advance Payment Request</b>"
+msgstr "<b>Solicitud de pago Anticipadot</b>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<b>Expenses</b>"
+msgstr "<b>Gastos</b>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<b>Other Info</b>"
+msgstr "<b>Otra información</b>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<b>Travel Request Information</b>"
+msgstr "<b>Información de Solicitud de Viaje</b>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "<span class=\"o_stat_text\">Journal Entry</span>"
+msgstr "<span class=\"“o_stat_text”\">Asiento Contable</span>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<span>,</span>"
+msgstr ""
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong class=\"mr16\">Subtotal</strong>"
+msgstr ""
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Approve By</strong>"
+msgstr "<strong>Aprobado por</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Approve Date</strong>"
+msgstr "<strong>Fecha de aprobación</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Available Departure Date</strong>"
+msgstr "<strong>Fecha de Salida disponible</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Available Return Date</strong>"
+msgstr "<strong>Fecha de Regreso disponible</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Bank Name</strong>"
+msgstr "<strong>Nombre del Banco</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Cheque Number</strong>"
+msgstr "<strong>#Cta. Bancaria</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Confirm By</strong>"
+msgstr "<strong>Confirmado por</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Confirm Date</strong>"
+msgstr "<strong>Confirmado el</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Days</strong>"
+msgstr "<strong>Días</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Department</strong>"
+msgstr "<strong>Departmento</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Departure Mode Of Travel</strong>"
+msgstr "<strong>Transporte de Salida</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Employee</strong>"
+msgstr "<strong>Empleado</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "<strong>Expense</strong>"
+msgstr "<strong>Gasto</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>From</strong>"
+msgstr "<strong>De</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Job Position</strong>"
+msgstr "<strong>Puesto de trabajo</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Manager</strong>"
+msgstr "<strong>Gerente</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Project</strong>"
+msgstr "<strong>Proyecto</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Request By</strong>"
+msgstr "<strong>Solicitado por</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Request Date</strong>"
+msgstr "<strong>Fecha de solicitud</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Request Departure Date</strong>"
+msgstr "<strong>Fecha de salida solicitada</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Request Mode Of Travel</strong>"
+msgstr "<strong>Transporte solicitado</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Request Return Date</strong>"
+msgstr "<strong>Fecha de Regreso solicitado</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Return Mode Of Travel</strong>"
+msgstr "<strong>Transporte de Regreso solicitado</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Ticket Booking Agent</strong>"
+msgstr "<strong>Agencia de Viajes</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>To</strong>"
+msgstr "<strong>A</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Travel Purpose</strong>"
+msgstr "<strong>Propósito de viaje</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "<strong>Visa Agent</strong>"
+msgstr "<strong>Agencia de Visa</strong>"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Accounting Info"
+msgstr "Información Contable"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__advance_payment_ids
+msgid "Advance Expenses"
+msgstr "Gastos anticipados"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Advance Payment"
+msgstr "Pagos anticipados"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__amount
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__final_amount
+msgid "Amount"
+msgstr "Importe"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__travel_amount
+msgid "Amount Calculated"
+msgstr "Importe Calculado"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__account_analytic_id
+msgid "Analytic Account"
+msgstr "Cuenta Analítica"
+
+#. module: bi_employee_travel_managment
+#: model:mail.template,name:bi_employee_travel_managment.approved_travel_expense_request_email_template
+msgid "Approval travel expense e-mail template"
+msgstr "Plantilla de correo para Gastos de Viaje"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Approve"
+msgstr "Aprobar"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__state__approved
+msgid "Approved"
+msgstr "Aprobado"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__approve_by
+msgid "Approved By"
+msgstr "Aprobado por"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__approve_date
+msgid "Approved Date"
+msgstr "Aprobado el"
+
+#. module: bi_employee_travel_managment
+#: model:mail.template,subject:bi_employee_travel_managment.approved_travel_expense_request_email_template
+msgid "Approved Travel Request"
+msgstr "Solicitud de Viaja aprobada"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__available_departure_date
+msgid "Available Departure Date"
+msgstr "Fecha de Regreso disponible"
+
+#. module: bi_employee_travel_managment
+#. odoo-python
+#: code:addons/bi_employee_travel_managment/models/travel_request.py:0
+msgid "Available Departure Date should be after the Available Return Date!!"
+msgstr ""
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__available_return_date
+msgid "Available Return Date"
+msgstr "Fecha de Regreso disponible"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__bank_id
+msgid "Bank Name"
+msgstr "Nombre del Banco"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_budget_rule
+msgid "Budget Rule"
+msgstr "Regla de Presupuesto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.actions.act_window,name:bi_employee_travel_managment.view_budget_setup_action
+#: model:ir.ui.menu,name:bi_employee_travel_managment.budget_rule_sub_menu
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_budget_setup_form
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_budget_setup_list
+msgid "Budget Setup"
+msgstr "Configuración del Presupuesto"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.travel_request_reject_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__cheque_number
+msgid "Cheque Number"
+msgstr "#Cta. Bancaria"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__from_city
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "City"
+msgstr "Ciudad"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__company_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__confirm_date
+msgid "Confirm Date"
+msgstr "Fecha confirmación"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__state__confirmed
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__confirm_by
+msgid "Confirmed By"
+msgstr "Confirmado por"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__phone_no
+msgid "Contact Number"
+msgstr "Número de Contacto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_hr_contract
+msgid "Contract"
+msgstr "Contrato del empleado"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__count_journal
+msgid "Count Invoice"
+msgstr "#Facturas"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__from_country_id
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Country"
+msgstr "País"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Create Expenses"
+msgstr "Crear Gastos"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.actions.act_window,help:bi_employee_travel_managment.view_budget_setup_action
+msgid "Create a Budget Rule"
+msgstr "Create Regla de Presupuesto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__expence_sheet_id
+msgid "Created Expense Sheet"
+msgstr "Crear Hoja de Gastos"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__create_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__create_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__create_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__create_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__create_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request_reject__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__create_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__create_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__create_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__create_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__create_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request_reject__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__currency_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__currency_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "Date"
+msgstr "Fecha"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__days
+msgid "Days"
+msgstr "Días"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__department_id
+msgid "Department"
+msgstr "Departamento"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__departure_mode_travel_id
+msgid "Departure Mode Of Travel"
+msgstr "Transporte de Salida"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "Description"
+msgstr "Descripción"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__display_name
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__display_name
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__display_name
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__display_name
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__display_name
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request_reject__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__email
+msgid "Email"
+msgstr "Correo Electrónico"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__employee_id
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_hr_contract__budget_amount
+msgid "Employee Budget"
+msgstr "Presupuestos de Empleado"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__travel_expense_ids
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Employee Travel Expense"
+msgstr "Gastos de Viaje de Empleados"
+
+#. module: bi_employee_travel_managment
+#: model:ir.actions.act_window,name:bi_employee_travel_managment.action_travel_req
+#: model:ir.ui.menu,name:bi_employee_travel_managment.menu_travel_request
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_list
+msgid "Employee Travel Request"
+msgstr "Solicitud de Viaje"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_hr_expense
+msgid "Expense"
+msgstr "Gasto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__journal_id
+msgid "Expense Journal"
+msgstr "Diario de Gastos"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__name
+msgid "Expense Note"
+msgstr "Nota del Gasto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__product_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__product_id
+msgid "Expense Product"
+msgstr "Producto de Gasto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_hr_expense_sheet
+msgid "Expense Report"
+msgstr "Reporte de gastos"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__expense_ids
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Expenses"
+msgstr "Gastos"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__state__submitted
+msgid "Expenses Submitted"
+msgstr "Gastos procesados"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "From"
+msgstr "Desde"
+
+#. module: bi_employee_travel_managment
+#: model:res.groups,name:bi_employee_travel_managment.hr_travel_manager_id
+msgid "HR Manager (Travel)"
+msgstr "Gerente de RH (Viajes)"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request_reject__id
+msgid "ID"
+msgstr ""
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__job_position_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__job_id
+msgid "Job Position"
+msgstr "Puesto de trabajo"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__exp_account_ids
+msgid "Journals"
+msgstr "Diarios"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__write_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__write_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__write_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__write_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__write_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request_reject__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__write_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__write_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__write_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__write_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__write_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request_reject__write_date
+msgid "Last Updated on"
+msgstr "Actualizado"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__department_manager_id
+msgid "Manager"
+msgstr "Gerente"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__state__manager_approval
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Manager Approval"
+msgstr "Aprobación del Gerente"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__modify_budget
+msgid "Modify Budget"
+msgstr "Modificar Presupuesto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_travel_mode
+#: model:ir.model,name:bi_employee_travel_managment.model_travel_request
+msgid "My Travel Request"
+msgstr "Mis olicitudes de Viaje"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__name
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "Name"
+msgstr "Nombre"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__original_budget
+msgid "Original Budget"
+msgstr "Presupuesto Original"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Other Info"
+msgstr "Otra Información"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__over_budegt
+msgid "Over Budget"
+msgstr "Fuera de Presupuesto"
+
+#. module: bi_employee_travel_managment
+#. odoo-python
+#: code:addons/bi_employee_travel_managment/models/travel_request.py:0
+msgid "Payment is already done for employee travel request"
+msgstr ""
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__plaza_id
+msgid "Plaza"
+msgstr ""
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__project_id
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__product_qty
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__travel_qty
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request_reject__reason
+msgid "Reason"
+msgstr "Motivo"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.travel_request_reject_form
+msgid "Reason for Travel Request Rejection"
+msgstr "Motivo de rechazo de la solicitud de viaje"
+
+#. module: bi_employee_travel_managment
+#: model:mail.template,subject:bi_employee_travel_managment.return_travel_expense_request_email_template
+msgid "Refused Travel Request"
+msgstr "Solicitud de Viaje Rechazado"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.travel_request_reject_form
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Reject"
+msgstr "Rechazar"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__state__rejected
+msgid "Rejected"
+msgstr "Rechazado"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__reject_by
+msgid "Rejected By"
+msgstr "Rechazado por"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__req_date
+msgid "Request Date"
+msgstr "Fecha Solicitud"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__req_departure_date
+msgid "Request Departure Date"
+msgstr "Fecha de salida solicitada"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__req_travel_mode_id
+msgid "Request Mode Of Travel"
+msgstr "Transporte solicitado"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__req_return_date
+msgid "Request Return Date"
+msgstr "Fecha de regreso solicitada"
+
+#. module: bi_employee_travel_managment
+#. odoo-python
+#: code:addons/bi_employee_travel_managment/models/travel_request.py:0
+msgid "Request Return Date should be after the Request Departure Date!!"
+msgstr ""
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__request_by
+msgid "Requested By"
+msgstr "Solicitado por"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Reset To Draft"
+msgstr "Restablecer a Borrador"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Return"
+msgstr "Regreso"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__return_mode_travel_id
+msgid "Return Mode Of Travel"
+msgstr "Modo de Regreso"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__return_mode_id
+msgid "Return Mode of Travel"
+msgstr "Modo de Regreso"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__state__returned
+msgid "Returned"
+msgstr "Devuelto"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.actions.act_window,help:bi_employee_travel_managment.view_budget_setup_action
+msgid "Specify Budget Rule for Particualr company and Product."
+msgstr ""
+"Especifique la regla de presupuesto para una empresa y un producto en "
+"particular."
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__state_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__from_state_id
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "State"
+msgstr "Estado"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_budget_rule__state_id
+msgid "State to which the plaza belongs"
+msgstr "Estado al que pertenece la Plaza"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__state
+msgid "States"
+msgstr "Estados"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__to_street
+msgid "Street"
+msgstr "Calle"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Street 2..."
+msgstr "Calle 2…"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Street..."
+msgstr "Calle…"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__to_street_2
+msgid "Street2"
+msgstr "Calle2"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "Sub Total"
+msgstr "SubTotal"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__ticket_booking_agent_id
+msgid "Ticket Booking Agent"
+msgstr "Agencia de Viajes"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "To"
+msgstr "A"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_hr_expense__travel_id
+#: model:ir.ui.menu,name:bi_employee_travel_managment.travel_main_menu
+msgid "Travel"
+msgstr "Viaje"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Travel Details"
+msgstr "Detalles del Viaje"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_travel_expence
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_hr_expense__travel_expence_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__travel_exp_id
+msgid "Travel Expence"
+msgstr "Gastos de Viaje"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_travel_expense_line
+msgid "Travel Expense Line"
+msgstr "Detalle de Gastos de Viaje"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__name
+msgid "Travel Mode"
+msgstr "Tipo de Transporte"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__travel_purpose
+msgid "Travel Purpose"
+msgstr "Propósito del Viaje"
+
+#. module: bi_employee_travel_managment
+#: model:ir.actions.report,name:bi_employee_travel_managment.report_employee_travel_print
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_account_bank_statement_line__travel_request_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_account_move__travel_request_id
+#: model:ir.ui.menu,name:bi_employee_travel_managment.travel_sub_menu
+msgid "Travel Request"
+msgstr "Solicitud de Viaje"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_travel_request_reject
+msgid "Travel Request Reject"
+msgstr "Solicitud de Viaje Rechazada"
+
+#. module: bi_employee_travel_managment
+#: model:ir.actions.act_window,name:bi_employee_travel_managment.action_travel_req_hr
+#: model:ir.ui.menu,name:bi_employee_travel_managment.menu_travel_request_approve
+msgid "Travel Request To Approve"
+msgstr "Solicitud de Viaje por Aprobar"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Travel Request information"
+msgstr "Información de la Solicitud de Viaje"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__state__treasury_department
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "Treasury Department"
+msgstr "Tesorería"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__unit_price
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
+msgid "Unit Price"
+msgstr "Precio"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__visa_agent_id
+msgid "Visa Agent"
+msgstr "Agente de Visa"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__within_budget
+msgid "Within Budget"
+msgstr "Dentro de Prepuesto"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
+msgid "ZIP"
+msgstr "CP"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__to_zip_code
+msgid "Zip"
+msgstr "CP"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__to_city
+msgid "city"
+msgstr "ciudad"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__to_country_id
+msgid "country"
+msgstr "país"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_hr_expense_sheet__travel_expense
+msgid "is a travel expense"
+msgstr "es un gasto de viaje"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.travel_request_reject_form
+msgid "or"
+msgstr "o"
+
+#. module: bi_employee_travel_managment
+#: model:mail.template,name:bi_employee_travel_managment.return_travel_expense_request_email_template
+msgid "return travel expense e-mail template"
+msgstr "plantilla de correo electrónico de gastos de viaje de regreso"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__to_state_id
+msgid "state"
+msgstr ""

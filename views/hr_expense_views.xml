@@ -1,0 +1,52 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="hr_contract_form_view_inherit_travel" model="ir.ui.view">
+			<field name="name">Hr Contract Form View Inherit</field>
+			<field name="model">hr.contract</field>
+			<field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+			<field name="arch" type="xml">			
+				<xpath expr="//page[@name='information']" position="inside">
+					<div class="o_row mw-25" name="budget_amount" >
+						<label for="budget_amount"/>
+						<field name="budget_amount" widget="monetary"/>
+					</div>
+				</xpath>
+		    </field>
+		</record>
+
+		<record id="hr_employee_form_view_inherit_bi" model="ir.ui.view">
+			<field name="name">Hr Employee Form View Inherit</field>
+			<field name="model">hr.expense</field>
+			<field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+			<field name="arch" type="xml">
+			<xpath expr="//t[@groups='hr_expense.group_hr_expense_team_approver']" position="replace">		
+				<field name="employee_id" groups="!hr.group_hr_user"
+	               context="{'default_company_id': company_id}" widget="many2one_avatar_employee"
+	               options="{'relation': 'hr.employee.public', 'no_create': True}"
+	               readonly="not is_editable or context.get('employee_id') or context.get('default_employee_id')"/>
+				<field name="employee_id" groups="hr.group_hr_user"
+	                   context="{'default_company_id': company_id}" widget="many2one_avatar_employee"
+	                   options="{'relation': 'hr.employee'}"
+	               readonly="not is_editable or context.get('employee_id') or context.get('default_employee_id')"/>
+			</xpath>
+			    <field name="payment_mode" position="replace">
+			    	 <field name="payment_mode" widget="radio" readonly="sheet_id or context.get('adv_payment') == True" /> 
+			    </field>
+		    </field>
+		</record>
+
+		<record id="account_move_form_view_inherit_bi" model="ir.ui.view">
+			<field name="name">Account.move.Form.View.Inherit</field>
+			<field name="model">account.move</field>
+			<field name="inherit_id" ref="account.view_move_form"/>
+			<field name="arch" type="xml">			
+				<field name="ref" position="after">
+					<field name="travel_request_id" invisible="1"/>
+				</field>
+		    </field>
+		</record>
+
+	</data>
+</odoo>

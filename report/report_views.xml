@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bi_employee_travel_managment.report_employee_travel_print" model="ir.actions.report">
+            <field name="name">Travel Request</field>
+            <field name="model">travel.request</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bi_employee_travel_managment.report_travel</field>
+            <field name="report_file">bi_employee_travel_managment.report_travel</field>
+            <field name="binding_model_id" ref="model_travel_request"/>
+            <field name="binding_type">report</field>  
+        </record>
+    </data>
+</odoo>

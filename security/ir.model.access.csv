@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_travel_request,access.travel.request,bi_employee_travel_managment.model_travel_request,base.group_user,1,1,1,1
+access_travel_mode,access.travel.mode,bi_employee_travel_managment.model_travel_mode,base.group_user,1,1,1,1
+bi_employee_travel_managment.access_travel_expence,access_travel_expence,bi_employee_travel_managment.model_travel_expence,base.group_user,1,1,1,1
+access_budget_rule,access.budget.rule,bi_employee_travel_managment.model_budget_rule,base.group_user,1,1,1,1
+access_travel_expense_line,access.travel.expense.line,bi_employee_travel_managment.model_travel_expense_line,base.group_user,1,1,1,1
+access_travel_request_reject,access.travel.request.reject,bi_employee_travel_managment.model_travel_request_reject,base.group_user,1,1,1,1

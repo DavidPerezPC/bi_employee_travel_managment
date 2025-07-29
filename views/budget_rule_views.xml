@@ -1,0 +1,64 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_budget_setup_form" model="ir.ui.view">
+	        <field name="name">budget.setup.form</field>
+	        <field name="model">budget.rule</field>
+	        <field name="arch" type="xml">
+	            <form string="Budget Setup">
+	            	<sheet>
+	                    <group>
+	                        <group>
+	                            <field name="plaza_id"/>
+	                            <field name="state_id"/>
+	                            <field name ="job_position_id"/>
+	                        </group>
+	                        <group>
+	                        	<field name="product_id"/>
+	                            <field name="currency_id" readonly="1" invisible="1"/>
+	                            <field name="amount" widget="monetary"/>
+	                            <field name="company_id"/>
+	                        </group>
+	                    </group>
+	                </sheet>
+	            </form>
+	        </field>
+	    </record>
+
+	    <record id="view_budget_setup_list" model="ir.ui.view">
+	        <field name="name">budget.setup.list</field>
+	        <field name="model">budget.rule</field>
+	        <field name="priority">2</field>
+	        <field name="arch" type="xml">
+	            <list string="Budget Setup">
+	                <field name="plaza_id"/>
+	                <field name="state_id"/>
+	                <field name="job_position_id"/>
+	                <field name="product_id"/>
+	                <field name="currency_id" column_invisible="1"/>
+	                <field name="amount"/>
+	                <field name="company_id"/>
+	            </list>
+	        </field>
+	    </record>
+
+	    <record id="view_budget_setup_action" model="ir.actions.act_window">
+	        <field name="name">Budget Setup</field>
+	        <field name="res_model">budget.rule</field>
+	        <field name="view_mode">list,form</field>
+	        <field name="help" type="html">
+	            <p class="o_view_nocontent_smiling_face">
+	            Create a Budget Rule
+	            </p><p>
+	            Specify Budget Rule for Particualr company and Product.
+	            </p>
+	        </field>
+	    </record>
+
+
+	    <menuitem id="budget_rule_sub_menu" name="Budget Setup" sequence="3"
+	        action="bi_employee_travel_managment.view_budget_setup_action" parent="travel_main_menu"/>
+
+
+    </data>
+</odoo>

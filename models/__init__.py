@@ -4,3 +4,4 @@
 from . import travel_request
 from . import budget_rule
 from . import hr_expense
+from . import czp_zone

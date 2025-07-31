@@ -5,3 +5,7 @@ bi_employee_travel_managment.access_travel_expence,access_travel_expence,bi_empl
 access_budget_rule,access.budget.rule,bi_employee_travel_managment.model_budget_rule,base.group_user,1,1,1,1
 access_travel_expense_line,access.travel.expense.line,bi_employee_travel_managment.model_travel_expense_line,base.group_user,1,1,1,1
 access_travel_request_reject,access.travel.request.reject,bi_employee_travel_managment.model_travel_request_reject,base.group_user,1,1,1,1
+access_czp_zone,access.czp.zone,bi_employee_travel_managment.model_czp_zone,base.group_user,1,1,1,1
+access_czp_zone_budget,access.czp.zone.budget,bi_employee_travel_managment.model_czp_zone_budget,base.group_user,1,1,1,1
+access_czp_zone_department_job_budget,access.czp.zone.department.job.budget,bi_employee_travel_managment.model_czp_zone_department_job_budget,base.group_user,1,1,1,1
+access_czp_zone_department_job_budget_line,access.czp.zone.department.job.budget.line,bi_employee_travel_managment.model_czp_zone_department_job_budget_line,base.group_user,1,1,1,1

@@ -56,8 +56,11 @@
 	    </record>
 
 
-	    <menuitem id="budget_rule_sub_menu" name="Budget Setup" sequence="3"
-	        action="bi_employee_travel_managment.view_budget_setup_action" parent="travel_main_menu"/>
+	    <menuitem id="budget_rule_sub_menu_root" name="Budget Setup" sequence="3"
+	         parent="travel_main_menu"/>
+	    <menuitem id="budget_rule_sub_menu" name="Budget Setup" sequence="100"
+	        action="bi_employee_travel_managment.view_budget_setup_action" 
+			parent="budget_rule_sub_menu_root"/>
 
 
     </data>

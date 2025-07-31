@@ -1,0 +1,224 @@
+<odoo>
+    <record id="view_czp_zone_tree" model="ir.ui.view">
+        <field name="name">czp.zone.tree</field>
+        <field name="model">czp.zone</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_czp_zone_form" model="ir.ui.view">
+        <field name="name">czp.zone.form</field>
+        <field name="model">czp.zone</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="budget_ids" context="{'default_czp_zone_id': id}">
+                                <list editable="bottom">
+                                    <field name="categ_id"/>
+                                    <field name="min_amount" widget="monetary"/>
+                                    <field name="max_amount" widget="monetary"/>
+                                </list>
+                            </field>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_czp_zone_search" model="ir.ui.view">
+        <field name="name">czp.zone.search</field>
+        <field name="model">czp.zone</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_czp_zone_budget_tree" model="ir.ui.view">
+        <field name="name">czp.zone.budget.tree</field>
+        <field name="model">czp.zone.budget</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="czp_zone_id"/>
+                <field name="categ_id"/>
+                <field name="min_amount" widget="monetary"/>
+                <field name="max_amount" widget="monetary"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_czp_zone_budget_pivot" model="ir.ui.view">
+        <field name="name">czp.zone.budget.pivot</field>
+        <field name="model">czp.zone.budget</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="czp_zone_id" type="row"/>
+                <field name="categ_id" type="col"/>
+                <field name="min_amount" type="measure"/>
+                <field name="max_amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_czp_zone_department_job_budget_tree" model="ir.ui.view">
+        <field name="name">czp.zone.department.job.budget.tree</field>
+        <field name="model">czp.zone.department.job.budget</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="hr_department_id"/>
+                <field name="hr_job_id"/>
+                <field name="czp_zone_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_czp_zone_department_job_budget_form" model="ir.ui.view">
+        <field name="name">czp.zone.department.job.budget.form</field>
+        <field name="model">czp.zone.department.job.budget</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group> 
+                        <group>
+                            <field name="name"/>
+                            <field name="hr_department_id"/>
+                            <field name="hr_job_id"/>
+                            <field name="czp_zone_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="budget_ids" context="{'default_zone_department_job_budget_id': id}">
+                                <list editable="bottom">
+                                    <field name="categ_id"/>
+                                    <field name="min_amount" widget="monetary"/>
+                                    <field name="max_amount" widget="monetary"/>
+                                </list>
+                            </field>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_czp_zone_department_job_budget_search" model="ir.ui.view">
+        <field name="name">czp.zone.department.job.budget.search</field>
+        <field name="model">czp.zone.department.job.budget</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="hr_department_id"/>
+                <field name="hr_job_id"/>
+                <field name="czp_zone_id"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_hr_department" string="Department" context="{'group_by': 'hr_department_id'}"/>
+                    <filter name="group_hr_job" string="Job" context="{'group_by': 'hr_job_id'}"/>
+                    <filter name="group_czp_zone" string="Zone" context="{'group_by': 'czp_zone_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_czp_zone_department_job_budget" model="ir.actions.act_window">
+        <field name="name">Zone Department Job Budgets</field>
+        <field name="res_model">czp.zone.department.job.budget</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_czp_zone_department_job_budget_search"/>
+    </record>
+
+    <menuitem id="zone_department_job_budget_menu" name="Zone Dept Job Budgets" sequence="15"
+        parent="budget_rule_sub_menu_root"
+        action="bi_employee_travel_managment.action_czp_zone_department_job_budget"/>
+    
+    <record id="view_czp_zone_department_job_budget_line_tree" model="ir.ui.view">
+        <field name="name">czp.zone.department.job.budget.line.tree</field>
+        <field name="model">czp.zone.department.job.budget.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="hr_department_id"/>
+                <field name="hr_job_id"/>
+                <field name="czp_zone_id"/>
+                <field name="categ_id"/>
+                <field name="min_amount" widget="monetary"/>
+                <field name="max_amount" widget="monetary"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_czp_zone_department_job_budget_line_pivot" model="ir.ui.view">
+        <field name="name">czp.zone.department.job.budget.line.pivot</field>
+        <field name="model">czp.zone.department.job.budget.line</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="hr_department_id" type="row"/>
+                <field name="hr_job_id" type="row"/>
+                <field name="czp_zone_id" type="row"/>
+                <field name="categ_id" type="col"/>
+                <field name="min_amount" type="measure"/>
+                <field name="max_amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_czp_zone_department_job_budget_line" model="ir.actions.act_window">
+        <field name="name">Zone Department Job Budget Lines</field>
+        <field name="view_mode">pivot,list</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_czp_zone_department_job_budget_line_pivot')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_czp_zone_department_job_budget_line_tree')}),
+        ]"/>
+        <field name="res_model">czp.zone.department.job.budget.line</field>
+    </record>
+
+    <menuitem id="zone_department_job_budget_line_menu" name="Zone Dept Job Budget Lines" sequence="20"
+        parent="budget_rule_sub_menu_root"
+        action="bi_employee_travel_managment.action_czp_zone_department_job_budget_line"/>
+    
+    <record id="action_czp_zone_budget" model="ir.actions.act_window">
+        <field name="name">Zone Budgets</field>
+        <field name="view_mode">pivot,list</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_czp_zone_budget_pivot')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_czp_zone_budget_tree')}),
+        ]"/>
+        <field name="res_model">czp.zone.budget</field>
+    </record>
+
+    <menuitem id="zone_budget_menu" name="Zone Budgets" sequence="10"
+        parent="budget_rule_sub_menu_root"
+        action="bi_employee_travel_managment.action_czp_zone_budget"/>
+    <!--record id="view_czp_zone_pivot" model="ir.ui.view">
+        <field name="name">czp.zone.pivot</field>
+        <field name="model">czp.zone</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="budget_id" type="row"/>
+                <field name="name" type="col"/>
+            </pivot>
+        </field>
+    </record-->
+
+    <record id="action_czp_zone" model="ir.actions.act_window">
+        <field name="name">Zones</field>
+        <field name="res_model">czp.zone</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_czp_zone_search"/>
+    </record>
+
+    <menuitem id="zone_budget_sub_menu" name="Zone Budget Setup" sequence="5"
+        action="bi_employee_travel_managment.action_czp_zone" 
+        parent="budget_rule_sub_menu_root"/>
+</odoo>

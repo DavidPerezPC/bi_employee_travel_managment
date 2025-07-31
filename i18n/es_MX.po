@@ -6,14 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-29 22:40+0000\n"
-"PO-Revision-Date: 2025-07-29 22:40+0000\n"
+"POT-Creation-Date: 2025-07-31 04:35+0000\n"
+"PO-Revision-Date: 2025-07-30 22:03-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: es_MX\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
 
 #. module: bi_employee_travel_managment
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
@@ -261,6 +263,8 @@ msgstr "Fecha de Regreso disponible"
 #: code:addons/bi_employee_travel_managment/models/travel_request.py:0
 msgid "Available Departure Date should be after the Available Return Date!!"
 msgstr ""
+"Fecha disponible de partida debe de ser antes de la Fecha disponible de "
+"regreso"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__available_return_date
@@ -273,6 +277,11 @@ msgid "Bank Name"
 msgstr "Nombre del Banco"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__name
+msgid "Budget Name"
+msgstr "Nombre del Presupuesto"
+
+#. module: bi_employee_travel_managment
 #: model:ir.model,name:bi_employee_travel_managment.model_budget_rule
 msgid "Budget Rule"
 msgstr "Regla de Presupuesto"
@@ -280,15 +289,53 @@ msgstr "Regla de Presupuesto"
 #. module: bi_employee_travel_managment
 #: model:ir.actions.act_window,name:bi_employee_travel_managment.view_budget_setup_action
 #: model:ir.ui.menu,name:bi_employee_travel_managment.budget_rule_sub_menu
+#: model:ir.ui.menu,name:bi_employee_travel_managment.budget_rule_sub_menu_root
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_budget_setup_form
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_budget_setup_list
 msgid "Budget Setup"
 msgstr "Configuración del Presupuesto"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__budget_ids
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__budget_ids
+msgid "Budgets"
+msgstr "Presupuestos"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone__budget_ids
+msgid "Budgets associated with this zone"
+msgstr "Presupuestos asociados a la Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_department_job_budget__budget_ids
+msgid "Budgets associated with this zone, department, and job combination"
+msgstr ""
+"Presupuestos asociados a la combinación de Departamento, Puesto de trabajo "
+"y Zona"
+
+#. module: bi_employee_travel_managment
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.travel_request_reject_form
 msgid "Cancel"
 msgstr "Cancelar"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__categ_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__categ_id
+msgid "Category"
+msgstr "Categoría"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_budget__categ_id
+msgid "Category of the budget"
+msgstr "Categoría de presupuesto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__categ_id
+msgid ""
+"Category of the budget line for this zone, department, and job combination"
+msgstr ""
+"Categoria de presupuesto para la combinación de Departamento, Puesto de "
+"trabajo y Zona"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__cheque_number
@@ -365,6 +412,10 @@ msgstr "Crear Hoja de Gastos"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__create_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__create_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__create_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__create_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__create_uid
@@ -375,6 +426,10 @@ msgstr "Creado por"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__create_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__create_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__create_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__create_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__create_date
@@ -401,9 +456,17 @@ msgid "Days"
 msgstr "Días"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__hr_department_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__hr_department_id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__department_id
 msgid "Department"
 msgstr "Departamento"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_department_job_budget__hr_department_id
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__hr_department_id
+msgid "Department associated with the budget"
+msgstr "Departamento asociado al Presupuesto "
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__departure_mode_travel_id
@@ -417,6 +480,10 @@ msgstr "Descripción"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__display_name
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__display_name
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__display_name
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__display_name
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__display_name
@@ -508,6 +575,10 @@ msgstr "Gerente de RH (Viajes)"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__id
@@ -517,10 +588,22 @@ msgid "ID"
 msgstr ""
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__hr_job_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__hr_job_id
+msgid "Job"
+msgstr "Puesto"
+
+#. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__job_position_id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__job_id
 msgid "Job Position"
 msgstr "Puesto de trabajo"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_department_job_budget__hr_job_id
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__hr_job_id
+msgid "Job associated with the budget"
+msgstr "Puesto asociado al Presupuesto "
 
 #. module: bi_employee_travel_managment
 #: model:ir.model,name:bi_employee_travel_managment.model_account_move
@@ -534,6 +617,10 @@ msgstr "Diarios"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__write_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__write_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__write_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__write_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__write_uid
@@ -544,6 +631,10 @@ msgstr "Actualizado por"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__write_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__write_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__write_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__write_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__write_date
@@ -564,6 +655,58 @@ msgid "Manager Approval"
 msgstr "Aprobación del Gerente"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__max_amount
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__max_amount
+msgid "Maximum Amount"
+msgstr "Monto Máximo"
+
+#. module: bi_employee_travel_managment
+#. odoo-python
+#: code:addons/bi_employee_travel_managment/models/czp_zone.py:0
+msgid "Maximum Amount cannot be smaller than Minimum Amount."
+msgstr "Monto Máximo no puede ser mas chico del Monto Mínimo"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__max_amount
+msgid ""
+"Maximum budget amount for this category within the zone, department, and "
+"job combination"
+msgstr ""
+"Monto máximo de prepuesto asignado para la Categoría dentro de la "
+"combinación Departamento, Puesto de trabajo y Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_budget__max_amount
+msgid "Maximum budget amount within this zone"
+msgstr "Monto Máximo del Presupuesto para la Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__min_amount
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__min_amount
+msgid "Minimum Amount"
+msgstr "Monto Mínimo"
+
+#. module: bi_employee_travel_managment
+#. odoo-python
+#: code:addons/bi_employee_travel_managment/models/czp_zone.py:0
+msgid "Minimum Amount cannot be greater than Maximum Amount."
+msgstr "Monto Mínimo no puede ser mas grande que el Monto Máximo"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__min_amount
+msgid ""
+"Minimum budget amount for this category within the zone, department, and "
+"job combination"
+msgstr ""
+"Monto mínimo de prepuesto asignado para la Categoría dentro de la "
+"combinación Departamento, Puesto de trabajo y Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_budget__min_amount
+msgid "Minimum budget amount within this zone"
+msgstr "Monto Mínimo del Presupuesto para la Zona"
+
+#. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__modify_budget
 msgid "Modify Budget"
 msgstr "Modificar Presupuesto"
@@ -575,10 +718,21 @@ msgid "My Travel Request"
 msgstr "Mis olicitudes de Viaje"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__name
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
 msgid "Name"
 msgstr "Nombre"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_department_job_budget__name
+msgid "Name of the budget"
+msgstr "Nombre del Presupuesto "
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone__name
+msgid "Name of the zone"
+msgstr "Nombre de la Zona"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__original_budget
@@ -599,7 +753,7 @@ msgstr "Fuera de Presupuesto"
 #. odoo-python
 #: code:addons/bi_employee_travel_managment/models/travel_request.py:0
 msgid "Payment is already done for employee travel request"
-msgstr ""
+msgstr "El pago ya fue realizado para esta solicitud de viaje"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__plaza_id
@@ -679,6 +833,8 @@ msgstr "Fecha de regreso solicitada"
 #: code:addons/bi_employee_travel_managment/models/travel_request.py:0
 msgid "Request Return Date should be after the Request Departure Date!!"
 msgstr ""
+"Fecha de Regreso solicitada debe de ser después de la Fecha de Salida "
+"solicitada"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__request_by
@@ -758,6 +914,13 @@ msgstr "Calle2"
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
 msgid "Sub Total"
 msgstr "SubTotal"
+
+#. module: bi_employee_travel_managment
+#. odoo-python
+#: code:addons/bi_employee_travel_managment/models/czp_zone.py:0
+msgid "The combination of Zone, Department, and Job must be unique."
+msgstr ""
+"La combinación Departamento, Puesto de trabajo y Zona debe de ser único."
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__ticket_booking_agent_id
@@ -857,6 +1020,72 @@ msgstr "CP"
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__to_zip_code
 msgid "Zip"
 msgstr "CP"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_czp_zone
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__czp_zone_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__czp_zone_id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__czp_zone_id
+msgid "Zone"
+msgstr "Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_czp_zone_budget
+msgid "Zone Budget"
+msgstr "Presupuesto por Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.ui.menu,name:bi_employee_travel_managment.zone_budget_sub_menu
+msgid "Zone Budget Setup"
+msgstr "Definición Presupuestos por Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.actions.act_window,name:bi_employee_travel_managment.action_czp_zone_budget
+#: model:ir.ui.menu,name:bi_employee_travel_managment.zone_budget_menu
+msgid "Zone Budgets"
+msgstr "Presupuestos por Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_czp_zone_department_job_budget
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__zone_department_job_budget_id
+msgid "Zone Department Job Budget"
+msgstr "Prepuesto por Departamento/Puesto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_czp_zone_department_job_budget_line
+msgid "Zone Department Job Budget Line"
+msgstr "Presupuestos de las Categorías por Departamento/Puesto/Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.actions.act_window,name:bi_employee_travel_managment.action_czp_zone_department_job_budget_line
+msgid "Zone Department Job Budget Lines"
+msgstr "Presupuestos de las Categorías por Departamento/Puesto/Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.actions.act_window,name:bi_employee_travel_managment.action_czp_zone_department_job_budget
+msgid "Zone Department Job Budgets"
+msgstr "Presupuestos por Departamento/Puesto/Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.ui.menu,name:bi_employee_travel_managment.zone_department_job_budget_line_menu
+msgid "Zone Dept Job Budget Lines"
+msgstr "Presup. por Departamento/Puesto/Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.ui.menu,name:bi_employee_travel_managment.zone_department_job_budget_menu
+msgid "Zone Dept Job Budgets"
+msgstr "Definición de Presup. por Depto/Puesto/Zona"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_department_job_budget__czp_zone_id
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__czp_zone_id
+msgid "Zone associated with the budget"
+msgstr "Zona asociada a este Presupuesto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.actions.act_window,name:bi_employee_travel_managment.action_czp_zone
+msgid "Zones"
+msgstr "Zonas"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__to_city

@@ -42,7 +42,7 @@
                     <button name="action_create_expence" string="Create Expenses"
                             type="object" invisible="state != 'returned'" context="{'default_employee_id': employee_id}"/>
                     <button name="action_draft" string="Reset To Draft"
-                            type="object" invisible="state not in ('returned', 'submitted')"/>
+                            type="object" invisible="state == 'draft'"/>
                     <button name="action_treasury_department" string="Treasury Department" type="object" invisible="state != 'treasury_department'" class="btn-primary"/>
                      <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,treasury_department,manager_approval,approved,returned"/>
                 </header>
@@ -67,6 +67,8 @@
                         <group>
                             <field name="employee_id" readonly="state != 'draft'"/>
                             <field name="department_manager_id" readonly="1"/>
+                            <field name="default_approver" readonly="state != 'draft'"/>
+                            <field name="czp_zone_id" readonly="state != 'draft'"/>
                         </group>
                         <group>
                             <field name="department_id" readonly="1" force_save="True"/>
@@ -92,7 +94,7 @@
                         <page string="Employee Travel Expense">
                             <group>
                                 <field name="within_budget"/>
-                                <field name="over_budegt"/>
+                                <field name="over_budget"/>
                             </group>
                             <group>
                                 <field name="original_budget"/>
@@ -103,8 +105,10 @@
                             <field name="travel_expense_ids">
                                 <list editable="bottom">
                                     <field name="product_id"/>
-                                    <field name="travel_exp_id"/>
+                                    <!--field name="travel_exp_id"/-->
                                     <field name="travel_qty"/>
+                                    <field name="travel_min_amount" force_save="True"/>
+                                    <field name="travel_max_amount" force_save="True"/>
                                     <field name="travel_amount" force_save="True"/>
                                     <field name="final_amount"/>
                                 </list>

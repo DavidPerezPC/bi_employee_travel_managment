@@ -25,12 +25,14 @@ class My_travel_request(models.Model):
     name = fields.Char(string="Name", readonly=True)
     employee_id = fields.Many2one('hr.employee', string="Employee", required=True)
     department_manager_id = fields.Many2one('hr.employee', string="Manager")
+    czp_zone_id = fields.Many2one('czp.zone', string="Zone", required=True)
     department_id = fields.Many2one('hr.department', string="Department")
     job_id = fields.Many2one('hr.job', string="Job Position")
     currency_id = fields.Many2one('res.currency', string="Currency",
                                   default=lambda self: self.env.user.company_id.currency_id.id, readonly=True)
     request_by = fields.Many2one('hr.employee', string="Requested By")
     confirm_by = fields.Many2one('res.users', string="Confirmed By")
+    default_approver = fields.Many2one('res.users', string="Expense Approver")
     approve_by = fields.Many2one('res.users', string="Approved By")
     reject_by = fields.Many2one('res.users',string="Rejected By")
     req_date = fields.Date(string="Request Date",readonly=True)
@@ -38,7 +40,7 @@ class My_travel_request(models.Model):
     approve_date = fields.Date(string="Approved Date",readonly=True)
     expence_sheet_id = fields.Many2one('hr.expense.sheet', string="Created Expense Sheet", readonly=True)
     travel_purpose = fields.Char(string="Travel Purpose", required=True)
-    project_id = fields.Many2one('project.task', string="Project", required=True)
+    project_id = fields.Many2one('project.task', string="Project" )
     account_analytic_id = fields.Many2one('account.analytic.account', string="Analytic Account")
     from_city = fields.Char('City')
     from_state_id = fields.Many2one('res.country.state', string="State")
@@ -72,8 +74,8 @@ class My_travel_request(models.Model):
          ('returned', 'Returned'), ('submitted', 'Expenses Submitted')], default="draft", string="States")
     original_budget = fields.Monetary(string="Original Budget",compute="_check_original_budget")
     modify_budget = fields.Monetary(string="Modify Budget")
-    within_budget = fields.Boolean(string="Within Budget",compute="_check_budget_amount")
-    over_budegt = fields.Boolean(string="Over Budget",compute="_check_budget_amount")
+    within_budget = fields.Boolean(string="Within Budget",compute="_check_original_budget")
+    over_budget = fields.Boolean(string="Over Budget",compute="_check_original_budget")
     company_id = fields.Many2one(comodel_name='res.company',string="Company",required=True,readonly=True,default=lambda self: self.env.company)
     count_journal = fields.Integer('Count Invoice',compute="_count_pentaly")
     journal_id = fields.Many2one(comodel_name='account.journal',string="Expense Journal",domain=[('type', '=', 'purchase')], store=True,
@@ -92,21 +94,27 @@ class My_travel_request(models.Model):
             if rec.travel_expense_ids:
                 total_amount = sum(rec.travel_expense_ids.mapped('travel_amount'))
                 total_modify_amount = sum(rec.travel_expense_ids.mapped('final_amount'))
-                rec.update({'original_budget': total_amount,'modify_budget':total_modify_amount})
+                total_min_amount = sum(rec.travel_expense_ids.mapped('travel_min_amount'))
+                total_max_amount = sum(rec.travel_expense_ids.mapped('travel_max_amount'))
+                rec.update({'original_budget': total_amount,
+                            'modify_budget': total_modify_amount,
+                            'within_budget': total_modify_amount  <= total_max_amount,
+                            'over_budget':  total_modify_amount > total_max_amount
+                            })
             else:
-                rec.update({'original_budget': 0.0,'modify_budget': 0.0})
+                rec.update({'original_budget': 0.0,'modify_budget': 0.0, 'within_budget': False, 'over_budget': False  })
 
-    @api.depends('original_budget','modify_budget')
-    def _check_budget_amount(self):
-        for rec in self:
-            contract_id = self.env['hr.contract'].search([('employee_id','=',rec.employee_id.id),('state','=','open')],limit=1)
-            if contract_id:
-                if contract_id.budget_amount <= rec.modify_budget:
-                    rec.update({'within_budget': False,'over_budegt':True})
-                else:
-                    rec.update({'within_budget': True,'over_budegt':False})
-            else:
-                rec.update({'within_budget': False,'over_budegt':False})
+    # @api.depends('original_budget','modify_budget')
+    # def _check_budget_amount(self):
+    #     for rec in self:
+    #         contract_id = self.env['hr.contract'].search([('employee_id','=',rec.employee_id.id),('state','=','open')],limit=1)
+    #         if contract_id:
+    #             if contract_id.budget_amount <= rec.modify_budget:
+    #                 rec.update({'within_budget': False,'over_budegt':True})
+    #             else:
+    #                 rec.update({'within_budget': True,'over_budegt':False})
+    #         else:
+    #             rec.update({'within_budget': False,'over_budegt':False})
 
 
 
@@ -115,6 +123,8 @@ class My_travel_request(models.Model):
         self.department_manager_id = self.employee_id.parent_id.id
         self.job_id = self.employee_id.job_id.id
         self.department_id = self.employee_id.department_id.id
+        self.request_by = self.employee_id.id
+        self.default_approver = self.employee_id.expense_manager_id.id
         return
 
     @api.constrains('req_departure_date', 'req_return_date', 'available_departure_date', 'available_return_date')
@@ -244,7 +254,7 @@ class My_travel_request(models.Model):
         account_invoice_obj  = self.env['account.move']
         account_invoice_line_obj = self.env['account.move.line']
         for rec in self:
-            if rec.over_budegt:
+            if rec.over_budget:
                 rec.write({'state': 'approved', 'approve_date': fields.datetime.now(),'approve_by': rec.env.user.id})
                 account_move = account_invoice_obj.create({ 'move_type': 'in_invoice',
                                                             'partner_id': rec.employee_id.sudo().work_contact_id.id,
@@ -374,17 +384,27 @@ class TravelExpenseLine(models.Model):
     product_id = fields.Many2one(comodel_name='product.product',string="Expense Product",domain=[('can_be_expensed', '=', True)],
         ondelete='restrict',required=True)
     travel_qty = fields.Float(string="Quantity",default=1)
-    travel_amount = fields.Float(string="Amount Calculated",readonly=True,store=True)
+    travel_amount = fields.Float(string="Amount Calculated", readonly=True, store=True)
+    travel_min_amount = fields.Float(string="Minimum Amount", readonly=True, store=True)
+    travel_max_amount = fields.Float(string="Maximum Amount", readonly=True, store=True)
     final_amount = fields.Float(string="Amount",required=True)
 
-    @api.onchange('product_id')
+    @api.onchange('product_id', 'travel_qty')
     def onchange_product_id(self):
         for line in self:
-            budget_id = self.env['budget.rule'].search([('plaza_id','=',line.travel_exp_id.employee_id.plaza_id.id),('state_id','=',line.travel_exp_id.employee_id.plaza_id.state_id.id),('job_position_id','=',line.travel_exp_id.job_id.id),('product_id','=',line.product_id.id)],limit=1)
-            if budget_id:
-                line.update({'travel_amount': budget_id.amount})
+            if not line.product_id:
+                continue
+            min_budget, max_budget = line.travel_exp_id.czp_zone_id.get_budget_amount(line.product_id.categ_id)
+            if min_budget or max_budget:
+                line.update({'travel_amount': min_budget * line.travel_qty,
+                             'final_amount': min_budget * line.travel_qty,
+                             'travel_min_amount': min_budget * line.travel_qty,
+                             'travel_max_amount': max_budget * line.travel_qty})
             else:
-                line.update({'travel_amount': line.product_id.list_price})
+                line.update({'travel_amount': line.product_id.list_price * line.travel_qty,
+                             'final_amount': line.product_id.list_price * line.travel_qty,
+                             'travel_min_amount': line.product_id.list_price * line.travel_qty,
+                             'travel_max_amount': line.product_id.list_price * line.travel_qty})
 
 
 

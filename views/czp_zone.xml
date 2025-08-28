@@ -221,4 +221,26 @@
     <menuitem id="zone_budget_sub_menu" name="Zone Budget Setup" sequence="5"
         action="bi_employee_travel_managment.action_czp_zone" 
         parent="budget_rule_sub_menu_root"/>
+
+    <menuitem id="zone_budget_sep_1" name="--------------" sequence="20"
+        parent="budget_rule_sub_menu_root"/>
+
+    <menuitem id="zone_budget_expense_product_menu" name="Expense Categories" sequence="30"
+        action="hr_expense.hr_expense_product" 
+        parent="budget_rule_sub_menu_root"/>
+
+    <menuitem id="zone_budget_sep_2" name="--------------" sequence="40"
+        parent="budget_rule_sub_menu_root"/>
+
+    <menuitem id="zone_budget_employees_menu" name="Employees" sequence="50"
+        action="hr.open_view_employee_list_my" 
+        parent="budget_rule_sub_menu_root"/>
+
+    <menuitem id="zone_budget_departments_menu" name="Departments" sequence="60"
+        action="hr.hr_department_kanban_action" 
+        parent="budget_rule_sub_menu_root"/>
+
+    <menuitem id="zone_budget_jobposition_menu" name="Job Positions" sequence="70"
+        action="hr.action_hr_job" 
+        parent="budget_rule_sub_menu_root"/>
 </odoo>

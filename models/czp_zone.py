@@ -23,6 +23,16 @@ class CZPZone(models.Model):
             }))
         default['budget_ids'] = new_budget_ids
         return super(CZPZone, self).copy(default)
+    
+    def get_budget_amount(self, categ_id):
+        if not categ_id:
+            return 0.0, 0.0
+        line = self.budget_ids.filtered(lambda b: b.categ_id == categ_id)
+        min_budget, max_budget = 0.0, 0.0
+        if line:
+            min_budget = line.min_amount
+            max_budget = line.max_amount
+        return min_budget, max_budget
 
 class CZPZoneBudget(models.Model):
     _name = 'czp.zone.budget'
@@ -44,6 +54,9 @@ class CZPZoneBudget(models.Model):
             if record.max_amount < record.min_amount:
                 raise ValidationError(_("Maximum Amount cannot be smaller than Minimum Amount."))
 
+    _sql_constraints = [
+        ('unique_zone_category', 'unique(categ_id, czp_zone_id)', 'The category must be unique within the zone.')
+    ]
 
 class CZPZoneDepartmentJobBudget(models.Model):
     _name = 'czp.zone.department.job.budget'

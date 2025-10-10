@@ -47,6 +47,7 @@ Employee Expenses
             'views/budget_rule_views.xml',
             'views/hr_expense_views.xml',
             'views/czp_zone.xml',
+            'views/hr_department.xml',
             'wizard/reject_reason_views.xml',
             'report/employee_travel_report.xml',
             'report/report_views.xml',],

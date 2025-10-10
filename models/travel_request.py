@@ -23,9 +23,17 @@ class My_travel_request(models.Model):
     _description = "My Travel Request"
 
     name = fields.Char(string="Name", readonly=True)
-    employee_id = fields.Many2one('hr.employee', string="Employee", required=True)
+    employee_id = fields.Many2one(
+        'hr.employee', 
+        string="Employee", 
+        required=True,
+        domain="[('active', '=', True), ('employee_status', '=', 'active')]",
+        help="Employee requesting the travel"
+    )
     department_manager_id = fields.Many2one('hr.employee', string="Manager")
     czp_zone_id = fields.Many2one('czp.zone', string="Zone", required=True)
+    plaza_id = fields.Many2one('czp.plazas', string="Plaza", required=True)
+    plaza_domain = fields.Char(string="Plaza Domain", compute="_compute_plaza_domain")
     department_id = fields.Many2one('hr.department', string="Department")
     job_id = fields.Many2one('hr.job', string="Job Position")
     currency_id = fields.Many2one('res.currency', string="Currency",
@@ -33,6 +41,7 @@ class My_travel_request(models.Model):
     request_by = fields.Many2one('hr.employee', string="Requested By")
     confirm_by = fields.Many2one('res.users', string="Confirmed By")
     default_approver = fields.Many2one('res.users', string="Expense Approver")
+    default_approver_domain = fields.Char(string="Default Approver Domain", compute="_compute_approver_domain")
     approve_by = fields.Many2one('res.users', string="Approved By")
     reject_by = fields.Many2one('res.users',string="Rejected By")
     req_date = fields.Date(string="Request Date",readonly=True)
@@ -126,6 +135,22 @@ class My_travel_request(models.Model):
         self.request_by = self.employee_id.id
         self.default_approver = self.employee_id.expense_manager_id.id
         return
+    
+    @api.depends('czp_zone_id')
+    def _compute_plaza_domain(self):
+        for rec in self:
+            if rec.czp_zone_id:
+                rec.plaza_domain = [('id', 'in', rec.czp_zone_id.plaza_ids.ids)]
+            else:
+                rec.plaza_domain = []
+
+    @api.depends('department_id')
+    def _compute_approver_domain(self):
+        for rec in self:
+            if rec.department_id:
+                rec.default_approver_domain = [('id', 'in', rec.department_id.manager_ids.ids)]
+            else:
+                rec.default_approver_domain = []
 
     @api.constrains('req_departure_date', 'req_return_date', 'available_departure_date', 'available_return_date')
     def check_dates(self):
@@ -133,7 +158,7 @@ class My_travel_request(models.Model):
             raise UserError(_('Request Return Date should be after the Request Departure Date!!'))
 
         if self.available_departure_date > self.available_return_date:
-            raise UserError(_('Available Departure Date should be after the Available Return Date!!'))
+            raise UserError(_('Available Departure Date should be before the Available Return Date!!'))
 
     @api.model_create_multi
     def create(self, vals_list):

@@ -1,7 +1,10 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
+class CzpPlas(models.Model):
+    _inherit = 'czp.plazas'
 
+    czp_zone_id = fields.Many2one('czp.zone', string='Zone', help='Zone to which the plaza belongs')
 
 class CZPZone(models.Model):
     _name = 'czp.zone'
@@ -11,6 +14,7 @@ class CZPZone(models.Model):
     budget_ids = fields.One2many('czp.zone.budget', 'czp_zone_id', 
                                  string='Budgets',
                                  help='Budgets associated with this zone')
+    plaza_ids = fields.One2many('czp.plazas', 'czp_zone_id', string='Plazas', help='Plazas associated with this zone')
 
     def copy(self, default=None):
         default = dict(default or {'name': self.name + ' (copy)'})
@@ -43,6 +47,7 @@ class CZPZoneBudget(models.Model):
                                string='Category', 
                                help='Category of the budget', 
                                required=True)
+    
     min_amount = fields.Float(string='Minimum Amount', help='Minimum budget amount within this zone')
     max_amount = fields.Float(string='Maximum Amount', help='Maximum budget amount within this zone')
 

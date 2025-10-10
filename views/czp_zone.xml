@@ -1,4 +1,16 @@
 <odoo>
+
+    <record id="view_czp_plazas_form_inherit_zone" model="ir.ui.view">
+        <field name="name">czp.plazas.form.inherit.zone</field>
+        <field name="model">czp.plazas</field>
+        <field name="inherit_id" ref="calzzapato_masterdata.view_czp_plazas_form"/>
+        <field name="arch" type="xml">
+            <field name="reference" position="after">
+                <field name="czp_zone_id"/>
+            </field>
+        </field>
+    </record>
+
     <record id="view_czp_zone_tree" model="ir.ui.view">
         <field name="name">czp.zone.tree</field>
         <field name="model">czp.zone</field>
@@ -18,6 +30,17 @@
                     <group>
                         <group>
                             <field name="name"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="plaza_ids" context="{'default_czp_zone_id': id}" widget="many2many_tags" options="{'no_create': True}">
+                                <!--list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="state_id"/>
+                                </list-->
+                            </field>
                         </group>
                     </group>
                     <group>

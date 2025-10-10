@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_department_form_inherit_manager_ids" model="ir.ui.view">
+        <field name="name">hr.department.form.inherit.manager.ids</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+            <field name="manager_id" position="after">
+                <field name="manager_ids" widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+</odoo>

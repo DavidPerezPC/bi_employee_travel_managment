@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_product_product_expense_form_inherit_duration_dependat" model="ir.ui.view">
+        <field name="name">product.product.expense.form.inherit.duration.dependat</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="hr_expense.product_product_expense_form_view"/>
+        <field name="arch" type="xml">
+            <field name="supplier_taxes_id" position="before">
+                <field name="duration_dependant"/>
+            </field>
+        </field>
+    </record>
+</odoo>

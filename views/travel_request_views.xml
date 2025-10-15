@@ -15,6 +15,7 @@
                 <field name="confirm_by"/>
                 <field name="approve_by"/>
                 <field name="company_id"/>
+                <field name="state"/>
             </list>
         </field>
     </record>
@@ -92,33 +93,11 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Employee Travel Expense">
-                            <group>
-                                <field name="within_budget"/>
-                                <field name="over_budget"/>
-                            </group>
-                            <group>
-                                <field name="original_budget"/>
-                                <field name="modify_budget"/>
-                                <field name="journal_id" required="travel_expense_ids"/>
-                            </group>
-
-                            <field name="travel_expense_ids">
-                                <list editable="bottom">
-                                    <field name="product_id"/>
-                                    <!--field name="travel_exp_id"/-->
-                                    <field name="travel_qty"/>
-                                    <field name="travel_min_amount" force_save="True"/>
-                                    <field name="travel_max_amount" force_save="True"/>
-                                    <field name="travel_amount" force_save="True"/>
-                                    <field name="final_amount"/>
-                                </list>
-                            </field>
-                        </page>
                         <page string="Travel Request information">
                             <group>
                                 <group>
-                                    <field name="travel_purpose" readonly="state != 'draft'"/>
+                                    <!--<field name="travel_purpose" readonly="state != 'draft'"/>-->
+                                    <field name="trip_purpose_id" readonly="state != 'draft'"/>
                                     <field name="project_id" readonly="state != 'draft'"/>
                                     <field name="account_analytic_id" readonly="state != 'draft'"/>
                                 </group>
@@ -138,7 +117,7 @@
                                 <group>
                                     <label for="to_street" string="To"/>
                                     <field name="plaza_domain" invisible="1"/>
-                                    <field name="plaza_id" readonly="state != 'draft'" domain="plaza_domain"/>
+                                    <field name="plaza_ids" readonly="state != 'draft'" domain="plaza_domain" widget="many2many_tags"/>
                                     <div class="o_address_format">
                                         <field name="to_street" placeholder="Street..." class="o_address_street"
                                                readonly="state != 'draft'"
@@ -164,6 +143,7 @@
                                 <group>
                                     <field name="req_departure_date" readonly="state != 'draft'"/>
                                     <field name="req_return_date" readonly="state != 'draft'"/>
+                                    <field name="req_dispersal_date" readonly="state != 'draft'"/>
                                     <field name="req_travel_mode_id" readonly="state != 'draft'"/>
                                     <field name="days"/>
                                 </group>
@@ -172,6 +152,29 @@
                                     <field name="email" readonly="state != 'draft'"/>
                                 </group>
                             </group>
+                        </page>
+                        <page string="Employee Travel Expense">
+                            <group>
+                                <field name="within_budget"/>
+                                <field name="over_budget"/>
+                            </group>
+                            <group>
+                                <field name="original_budget"/>
+                                <field name="modify_budget"/>
+                                <field name="journal_id" required="travel_expense_ids"/>
+                            </group>
+
+                            <field name="travel_expense_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <!--field name="travel_exp_id"/-->
+                                    <field name="travel_qty"/>
+                                    <field name="travel_min_amount" force_save="True"/>
+                                    <field name="travel_max_amount" force_save="True"/>
+                                    <field name="travel_amount" force_save="True"/>
+                                    <field name="final_amount"/>
+                                </list>
+                            </field>
                         </page>
                         <page string="Other Info" >
                             <group readonly="state != 'draft'">
@@ -190,8 +193,9 @@
                             </group>
                             <group string="Accounting Info">
                                 <group>
-                                    <field name="bank_id"/>
-                                    <field name="cheque_number"/>
+                                    <field name="card_employee_id" readonly="state != 'draft'"/>
+                                    <field name="bank_id" readonly="state != 'draft'"/>
+                                    <field name="cheque_number" readonly="state != 'draft'"/>
                                 </group>
                                 <group></group>
                             </group>
@@ -210,11 +214,31 @@
         </field>
     </record>
 
+    <record id="view_travel_req_search" model="ir.ui.view">
+        <field name="name">travel.request.search</field>
+        <field name="model">travel.request</field>
+        <field name="arch" type="xml">
+            <search string="Search Travel Requests">
+                <filter name="draft_state" string="Draft" domain="[('state', '=', 'draft')]" /> 
+                <filter name="confirmed_state" string="Confirmed" domain="[('state', '=', 'confirmed')]" />
+                <filter name="approved_state" string="Approved" domain="[('state', '=', 'approved')]" />
+                <filter name="returned_state" string="Returned" domain="[('state', '=', 'returned')]" />
+                <filter name="rejected_state" string="Rejected" domain="[('state', '=', 'rejected')]" />
+                <group expand="0" string="Group By">
+                    <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                    <filter name="group_employee" string="Employee" context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_date" string="Request Date" context="{'group_by': 'req_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="action_travel_req" model="ir.actions.act_window">
         <field name="name">Employee Travel Request</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">travel.request</field>
         <field name="view_mode">list,form,kanban</field>
+        <field name="search_view_id" ref="view_travel_req_search"/>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create"></p>
             <p></p>

@@ -6,3 +6,5 @@ from . import budget_rule
 from . import hr_expense
 from . import czp_zone
 from . import hr_department
+from . import czp_trip_purpose
+from . import product_product

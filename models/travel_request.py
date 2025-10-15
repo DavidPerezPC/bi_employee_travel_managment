@@ -28,11 +28,23 @@ class My_travel_request(models.Model):
         string="Employee", 
         required=True,
         domain="[('active', '=', True), ('employee_status', '=', 'active')]",
-        help="Employee requesting the travel"
+        help="Employee requesting the travel",
+        #default=lambda self: self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
     )
+
+    card_employee_id = fields.Many2one(
+        'hr.employee', 
+        string="Employee Card", 
+        store=True, 
+        help="Employee card number to cover travel's expenses",
+        domain="[('active', '=', True), ('employee_status', '=', 'active')]",
+        #default=lambda self: self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
+    )
+
     department_manager_id = fields.Many2one('hr.employee', string="Manager")
     czp_zone_id = fields.Many2one('czp.zone', string="Zone", required=True)
-    plaza_id = fields.Many2one('czp.plazas', string="Plaza", required=True)
+    #plaza_id = fields.Many2one('czp.plazas', string="Plaza", required=True)
+    plaza_ids = fields.Many2many('czp.plazas', string="Plazas", required=True)
     plaza_domain = fields.Char(string="Plaza Domain", compute="_compute_plaza_domain")
     department_id = fields.Many2one('hr.department', string="Department")
     job_id = fields.Many2one('hr.job', string="Job Position")
@@ -48,12 +60,13 @@ class My_travel_request(models.Model):
     confirm_date = fields.Date(string="Confirm Date",readonly=True)
     approve_date = fields.Date(string="Approved Date",readonly=True)
     expence_sheet_id = fields.Many2one('hr.expense.sheet', string="Created Expense Sheet", readonly=True)
-    travel_purpose = fields.Char(string="Travel Purpose", required=True)
+    #travel_purpose = fields.Char(string="Travel Purpose", required=True)
+    trip_purpose_id = fields.Many2one('czp.trip.purpose', string="Trip Purpose", required=True)
     project_id = fields.Many2one('project.task', string="Project" )
     account_analytic_id = fields.Many2one('account.analytic.account', string="Analytic Account")
-    from_city = fields.Char('City')
-    from_state_id = fields.Many2one('res.country.state', string="State")
-    from_country_id = fields.Many2one('res.country', string="Country")
+    from_city = fields.Char('City', required=True)
+    from_state_id = fields.Many2one('res.country.state', string="State",required=True)
+    from_country_id = fields.Many2one('res.country', string="Country", required=True)
     to_street = fields.Char('Street')
     to_street_2 = fields.Char('Street2')
     to_city = fields.Char('city')
@@ -62,19 +75,27 @@ class My_travel_request(models.Model):
     to_zip_code = fields.Char('Zip')
     req_departure_date = fields.Datetime(string="Request Departure Date", required=True)
     req_return_date = fields.Datetime(string="Request Return Date", required=True)
+    req_dispersal_date  = fields.Datetime(string="Request Dispersal Date", required=True)
     days = fields.Char('Days', compute="_compute_days")
     req_travel_mode_id = fields.Many2one('travel.mode', string="Request Mode Of Travel")
     return_mode_id = fields.Many2one('travel.mode', string="Return Mode of Travel")
-    phone_no = fields.Char('Contact Number')
-    email = fields.Char('Email')
+    phone_no = fields.Char('Contact Number', required=True)
+    email = fields.Char('Email', required=True)
     available_departure_date = fields.Datetime(string="Available Departure Date")
     available_return_date = fields.Datetime(string="Available Return Date")
     departure_mode_travel_id = fields.Many2one('travel.mode', string="Departure Mode Of Travel")
     return_mode_travel_id = fields.Many2one('travel.mode', string="Return Mode Of Travel")
     visa_agent_id = fields.Many2one('res.partner', string="Visa Agent")
     ticket_booking_agent_id = fields.Many2one('res.partner', string="Ticket Booking Agent")
-    bank_id = fields.Many2one('res.bank', string="Bank Name")
-    cheque_number = fields.Char(string="Cheque Number")
+    bank_id = fields.Many2one('res.bank', 
+                              string="Bank Name",
+                              help="Bank associated with the cheque number", 
+                              required=True
+                              )
+    cheque_number = fields.Char(string="Cheque Number", 
+                                help="Cheque number associated with the bank",
+                                required=True
+                                )
     advance_payment_ids = fields.One2many('hr.expense', 'travel_id', string="Advance Expenses")
     expense_ids = fields.One2many('hr.expense', 'travel_expence_id', string="Expenses")
     travel_expense_ids = fields.One2many('travel.expense.line', 'travel_exp_id', string="Employee Travel Expense")
@@ -91,6 +112,38 @@ class My_travel_request(models.Model):
         check_company=True)
     exp_account_ids = fields.Many2many('account.move',string="Journals")
 
+
+    # @api.model
+    # def _get_employee_bank(self):
+    #     return self._get_bank_cheque_number('bank_id.id')
+    #     # if not self.employee_id:
+    #     #     self.employee_id = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
+
+    #     # if not self.card_employee_id and self.employee_id:
+    #     #     self.card_employee_id = self.employee_id
+    #     # return self.card_employee_id.bank_account_id.bank_id.id
+
+    # @api.model
+    # def _get_employee_cheque_number(self):
+    #     return self._get_bank_cheque_number('acc_number')
+
+    # def _get_bank_cheque_number(self, field_name):
+
+    #     if not self.employee_id:
+    #         emp_id = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
+    #         if emp_id:
+    #             self.employee_id = emp_id[0]
+
+    #     if not self.card_employee_id and self.employee_id:
+    #         self.card_employee_id = self.employee_id
+
+    #     value_to_return = False
+    #     cexpr = "self.card_employee_id.bank_account_id." + field_name 
+    #     if self.card_employee_id:
+    #         value_to_return = eval(cexpr)
+
+    #     return value_to_return
+     
     @api.depends('state','travel_expense_ids')
     def _count_pentaly(self):
         for rec in self:
@@ -134,8 +187,26 @@ class My_travel_request(models.Model):
         self.department_id = self.employee_id.department_id.id
         self.request_by = self.employee_id.id
         self.default_approver = self.employee_id.expense_manager_id.id
+        if not self.card_employee_id:
+            self.card_employee_id = self.employee_id.id
+            if self.employee_id.bank_account_id:
+                self.bank_id = self.employee_id.bank_account_id.bank_id.id
+                self.cheque_number = self.employee_id.bank_account_id.acc_number
         return
     
+    @api.onchange('card_employee_id')
+    def onchange_card_employee(self):
+        if self.card_employee_id:
+            self.bank_id = self.card_employee_id.bank_account_id.bank_id.id
+            self.cheque_number = self.card_employee_id.bank_account_id.acc_number
+        return
+    
+    @api.onchange('req_departure_date')
+    def _onchange_req_departure_date(self):
+        if not self.req_dispersal_date:
+            self.req_dispersal_date = self.req_departure_date
+        return
+
     @api.depends('czp_zone_id')
     def _compute_plaza_domain(self):
         for rec in self:
@@ -413,12 +484,23 @@ class TravelExpenseLine(models.Model):
     travel_min_amount = fields.Float(string="Minimum Amount", readonly=True, store=True)
     travel_max_amount = fields.Float(string="Maximum Amount", readonly=True, store=True)
     final_amount = fields.Float(string="Amount",required=True)
+    duration_dependant = fields.Boolean(string="Duration Dependant", 
+                                        related='product_id.duration_dependant', 
+                                        store=True)
 
     @api.onchange('product_id', 'travel_qty')
     def onchange_product_id(self):
         for line in self:
             if not line.product_id:
                 continue
+
+            days = 0
+            if line.travel_exp_id.days.split(' ')[0].isdigit():
+                days = int(line.travel_exp_id.days.split(' ')[0])
+
+            if line.travel_qty <= 1 and line.duration_dependant and days:
+                line.travel_qty = days
+                
             min_budget, max_budget = line.travel_exp_id.czp_zone_id.get_budget_amount(line.product_id.categ_id)
             if min_budget or max_budget:
                 line.update({'travel_amount': min_budget * line.travel_qty,

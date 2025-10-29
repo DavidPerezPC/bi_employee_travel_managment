@@ -100,7 +100,7 @@ class My_travel_request(models.Model):
     expense_ids = fields.One2many('hr.expense', 'travel_expence_id', string="Expenses")
     travel_expense_ids = fields.One2many('travel.expense.line', 'travel_exp_id', string="Employee Travel Expense")
     state = fields.Selection(
-        [('draft', 'Draft'), ('confirmed', 'Confirmed'),('treasury_department','Treasury Department'),('manager_approval','Manager Approval'),('approved', 'Approved'), ('rejected', 'Rejected'),
+        [('draft', 'Draft'), ('confirmed', 'Confirmed'),('manager_approval','Manager Approval'), ('treasury_department','Treasury Department'), ('approved', 'Approved'), ('rejected', 'Rejected'),
          ('returned', 'Returned'), ('submitted', 'Expenses Submitted')], default="draft", string="States")
     original_budget = fields.Monetary(string="Original Budget",compute="_check_original_budget")
     modify_budget = fields.Monetary(string="Modify Budget")
@@ -495,7 +495,7 @@ class TravelExpenseLine(models.Model):
                 continue
 
             days = 0
-            if line.travel_exp_id.days.split(' ')[0].isdigit():
+            if line.travel_exp_id.days and line.travel_exp_id.days.split(' ')[0].isdigit():
                 days = int(line.travel_exp_id.days.split(' ')[0])
 
             if line.travel_qty <= 1 and line.duration_dependant and days:

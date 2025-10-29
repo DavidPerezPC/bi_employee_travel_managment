@@ -45,7 +45,7 @@
                     <button name="action_draft" string="Reset To Draft"
                             type="object" invisible="state == 'draft'"/>
                     <button name="action_treasury_department" string="Treasury Department" type="object" invisible="state != 'treasury_department'" class="btn-primary"/>
-                     <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,treasury_department,manager_approval,approved,returned"/>
+                     <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,manager_approval,treasury_department,approved,returned"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -161,7 +161,7 @@
                             <group>
                                 <field name="original_budget"/>
                                 <field name="modify_budget"/>
-                                <field name="journal_id" required="travel_expense_ids"/>
+                                <field name="journal_id"/>
                             </group>
 
                             <field name="travel_expense_ids">

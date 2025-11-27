@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <list string="Employee Travel Request">
                 <field name="employee_id"/>
+                <field name="czp_company_id"/>
                 <field name="department_manager_id"/>
                 <field name="department_id"/>
                 <field name="job_id"/>
@@ -14,12 +15,24 @@
                 <field name="request_by"/>
                 <field name="confirm_by"/>
                 <field name="approve_by"/>
-                <field name="company_id"/>
                 <field name="state"/>
             </list>
         </field>
     </record>
 
+    <!--ADDED-->
+    <record id="view_travel_req_list_inherited" model="ir.ui.view">
+        <field name="name">travel.request.list.inherited</field>
+        <field name="model">travel.request</field>
+        <field name="inherit_id" ref="view_travel_req_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button name="action_generate_transfer" string="Generate Transfer" type="object" class="btn-primary"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
 
     <record id="view_travel_req_form" model="ir.ui.view">
         <field name="name">travel.request.form</field>
@@ -76,7 +89,7 @@
                             <field name="department_id" readonly="1" force_save="True"/>
                             <field name="job_id" readonly="1" force_save="True"/>
                             <field name="currency_id" readonly="state != 'draft'"/>
-                            <field name="company_id"/>
+                            <field name="czp_company_id" readonly="1"/>
                         </group>
                         <group>
                             <field name="request_by"/>
@@ -224,8 +237,11 @@
                 <filter name="approved_state" string="Approved" domain="[('state', '=', 'approved')]" />
                 <filter name="returned_state" string="Returned" domain="[('state', '=', 'returned')]" />
                 <filter name="rejected_state" string="Rejected" domain="[('state', '=', 'rejected')]" />
+                <field name="employee_id"/>
+                <field name="czp_company_id"/>
                 <group expand="0" string="Group By">
                     <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                    <filter name="czp_company_id" string="Company" context="{'group_by': 'czp_company_id'}"/>
                     <filter name="group_employee" string="Employee" context="{'group_by': 'employee_id'}"/>
                     <filter name="group_date" string="Request Date" context="{'group_by': 'req_date'}"/>
                 </group>
@@ -246,12 +262,27 @@
     </record>
 
 
+
     <record id="action_travel_req_hr" model="ir.actions.act_window">
         <field name="name">Travel Request To Approve</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">travel.request</field>
         <field name="view_mode">list,form,kanban</field>
         <field name="domain">[('state','in',['confirmed','approved','rejected'])]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create"></p>
+            <p></p>
+        </field>
+    </record>
+
+    <!--ADDED-->
+    <record id="action_travel_req_hr_transfer" model="ir.actions.act_window">
+        <field name="name">Travel Request To Transfer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">travel.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_travel_req_list_inherited"/>
+        <field name="domain">[('state','in',['treasury_department'])]</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create"></p>
             <p></p>
@@ -280,6 +311,13 @@
               sequence="3"
               groups="bi_employee_travel_managment.hr_travel_manager_id"/>
 
+    <!--ADDED-->
+    <menuitem action="action_travel_req_hr_transfer"
+              id="menu_travel_request_to_transfer"
+              parent="travel_sub_menu"
+              name="Travel Request To Bank Transfer"
+              sequence="4"
+              groups="bi_employee_travel_managment.hr_travel_manager_id"/>
     
 
 </odoo>

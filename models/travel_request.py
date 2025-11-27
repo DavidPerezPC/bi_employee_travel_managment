@@ -4,7 +4,9 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime, timedelta,date
-
+import base64
+import csv
+from io import StringIO
 
 class travel_expence(models.Model):
     _name = "travel.expence"
@@ -41,6 +43,9 @@ class My_travel_request(models.Model):
         #default=lambda self: self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
     )
 
+    czp_company_id = fields.Many2one('czp.companies',
+                                     related='employee_id.czp_company_id', 
+                                     string="Company", required=True, store=True)
     department_manager_id = fields.Many2one('hr.employee', string="Manager")
     czp_zone_id = fields.Many2one('czp.zone', string="Zone", required=True)
     #plaza_id = fields.Many2one('czp.plazas', string="Plaza", required=True)
@@ -465,6 +470,54 @@ class My_travel_request(models.Model):
         return
 
 
+    def action_generate_transfer(self):
+        records = self.browse(self.env.context.get("active_ids", []))
+
+        buffer = StringIO()
+        writer = csv.writer(buffer)
+
+        writer.writerow([
+            "Numero de Tarjeta",
+            "Descripción",
+            "signo",
+            "Limite",
+            "fecha inicio",
+            "Fecha fin",
+            "celular",
+            "cambio de estatus"
+        ])
+
+        for r in records:
+            writer.writerow([
+                r.cheque_number or "",
+                r.trip_purpose_id.name if r.trip_purpose_id else "",
+                "+",
+                r.modify_budget or 0,
+                str(r.req_dispersal_date)[:10].replace("-", "") if r.req_dispersal_date else "",
+                str(r.req_return_date)[:10].replace("-", "") if r.req_return_date else "",
+                r.phone_no or "",
+                "",
+            ])
+
+        csv_content = buffer.getvalue().encode()
+        buffer.close()
+
+        b64 = base64.b64encode(csv_content).decode()
+
+        attachment = self.env["ir.attachment"].create({
+            "name": "travel_requests.csv",
+            "datas": b64,
+            "mimetype": "text/csv",
+            "type": "binary",
+        })
+
+        return {
+            "type": "ir.actions.act_url",
+            "url": f"/web/content/{attachment.id}?download=true",
+            "target": "self",
+        }
+
+    
 class my_travel_request(models.Model):
     _name = "travel.mode"
     _description = "My Travel Request"

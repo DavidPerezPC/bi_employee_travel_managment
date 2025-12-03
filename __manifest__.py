@@ -51,8 +51,15 @@ Employee Expenses
             'views/product_product_views.xml',
             'views/hr_department.xml',
             'wizard/reject_reason_views.xml',
+            'wizard/get_date_form_wizard.xml',
             'report/employee_travel_report.xml',
             'report/report_views.xml',],
+    # 'assets': {
+    #     'web.assets_backend': [
+    #         'bi_employee_travel_managment/static/src/js/download_and_close.js',
+    #         'bi_employee_travel_managment/static/src/xml/download_and_close.xml',
+    #     ],
+    # },
     'installable': True,
     'auto_install': False,
     'application': True,

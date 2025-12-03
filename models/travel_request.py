@@ -310,6 +310,7 @@ class My_travel_request(models.Model):
         return
 
     def action_treasury_department(self):
+
         account_invoice_obj  = self.env['account.move']
         account_invoice_line_obj = self.env['account.move.line']
         for rec in self:
@@ -470,9 +471,22 @@ class My_travel_request(models.Model):
         return
 
 
+    def action_get_date_from_wizard(self):
+        selected_date=self.browse(self.env.context.get('active_ids',[])[0])[0].req_dispersal_date
+        action = self.env['ir.actions.act_window']._for_xml_id('bi_employee_travel_managment.action_get_date_form_wizard')
+        action['context'] = dict(self.env.context or {}, default_date=selected_date)
+        return action
+    
     def action_generate_transfer(self):
-        records = self.browse(self.env.context.get("active_ids", []))
 
+        #date_form = self._get_date_wizard()
+
+        records = self.browse(self.env.context.get("active_ids", []))
+        date_to_export = self.env.context.get('selected_date', fields.Date.today())
+        date_to_export = datetime.strftime(date_to_export, '%Y%m%d')
+        acc_number = ''
+        row_count = 0
+        total_amount = 0.0
         buffer = StringIO()
         writer = csv.writer(buffer)
 
@@ -488,6 +502,10 @@ class My_travel_request(models.Model):
         ])
 
         for r in records:
+            if not acc_number:
+                acc_number = r.czp_company_id.bank_account_number or ''
+            row_count += 1
+            total_amount += r.modify_budget or 0
             writer.writerow([
                 r.cheque_number or "",
                 r.trip_purpose_id.name if r.trip_purpose_id else "",
@@ -498,6 +516,14 @@ class My_travel_request(models.Model):
                 r.phone_no or "",
                 "",
             ])
+
+        writer.writerow([
+            acc_number,
+            acc_number,
+            date_to_export,
+            row_count,
+            int(total_amount),
+        ])
 
         csv_content = buffer.getvalue().encode()
         buffer.close()
@@ -511,10 +537,39 @@ class My_travel_request(models.Model):
             "type": "binary",
         })
 
+        # return {
+        #     "type": "ir.actions.client",
+        #     "tag": "download_and_close_wizard",
+        #     "target": "new",
+        #     "params": {
+        #         "attachment_id": attachment.id,
+        #         "filename": "travel_requests.csv",
+        #     },
+        # }
+
         return {
             "type": "ir.actions.act_url",
             "url": f"/web/content/{attachment.id}?download=true",
+            #"url": f"/bi_employee_travel_managment/download/{attachment.id}?filename={attachment.name}",
             "target": "self",
+        }
+    
+# models/download_wizard.py
+from odoo import models, fields, api
+
+class DownloadAttachmentWizard(models.TransientModel):
+    _name = "download.attachment.wizard"
+    _description = "Download Attachment Wizard"
+
+    name = fields.Char("Filename", required=True)
+    attachment_id = fields.Many2one("ir.attachment", required=True)
+
+    def action_download(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_url",
+            "target": "self",   # IMPORTANT
+            "url": f"/bi_employee_travel_managment/download/{attachment_id.id}?filename={self.name}",
         }
 
     

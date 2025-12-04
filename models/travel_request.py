@@ -488,7 +488,7 @@ class My_travel_request(models.Model):
         row_count = 0
         total_amount = 0.0
         buffer = StringIO()
-        writer = csv.writer(buffer)
+        writer = csv.writer(buffer, delimiter=";")
 
         writer.writerow([
             "Numero de Tarjeta",

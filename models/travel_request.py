@@ -45,7 +45,7 @@ class My_travel_request(models.Model):
 
     czp_company_id = fields.Many2one('czp.companies',
                                      related='employee_id.czp_company_id', 
-                                     string="Company", required=True, store=True)
+                                     string="Company", store=True)
     department_manager_id = fields.Many2one('hr.employee', string="Manager")
     czp_zone_id = fields.Many2one('czp.zone', string="Zone", required=True)
     #plaza_id = fields.Many2one('czp.plazas', string="Plaza", required=True)

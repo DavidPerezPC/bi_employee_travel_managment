@@ -29,6 +29,11 @@
             <xpath expr="//list" position="inside">
                 <header>
                     <button name="action_get_date_from_wizard" string="Generate Transfer" type="object" class="btn-primary"/>
+                    <button name="action_treasury_department_done" 
+                        string="Mark as Done" 
+                        type="object" 
+                        class="btn-primary"
+                        display="always"/>
                 </header>
             </xpath>
             <xpath expr="//field[@name='czp_company_id']" position="after">
@@ -114,6 +119,12 @@
                                 <group>
                                     <!--<field name="travel_purpose" readonly="state != 'draft'"/>-->
                                     <field name="trip_purpose_id" readonly="state != 'draft'"/>
+                                    <field name="travel_type" readonly="state != 'draft'"/>
+                                    <field name="employee_group_ids" 
+                                        readonly="state != 'draft'"
+                                        invisible="travel_type != 'grupal'"
+                                        required="travel_type == 'grupal'"
+                                        widget="many2many_tags"/>
                                     <field name="project_id" readonly="state != 'draft'"/>
                                     <field name="account_analytic_id" readonly="state != 'draft'"/>
                                 </group>
@@ -157,9 +168,10 @@
                             </group>
                             <group>
                                 <group>
+                                    <field name="is_manager_user" invisible="1"/>
                                     <field name="req_departure_date" readonly="state != 'draft'"/>
                                     <field name="req_return_date" readonly="state != 'draft'"/>
-                                    <field name="req_dispersal_date" readonly="state != 'draft'"/>
+                                    <field name="req_dispersal_date" readonly="state != 'draft' or not is_manager_user"/>
                                     <field name="req_travel_mode_id" readonly="state != 'draft'"/>
                                     <field name="days"/>
                                 </group>
@@ -185,8 +197,8 @@
                                     <field name="product_id"/>
                                     <!--field name="travel_exp_id"/-->
                                     <field name="travel_qty"/>
-                                    <field name="travel_min_amount" force_save="True"/>
-                                    <field name="travel_max_amount" force_save="True"/>
+                                    <field name="travel_min_amount" force_save="True" column_invisible="not parent.is_manager_user"/>
+                                    <field name="travel_max_amount" force_save="True" column_invisible="not parent.is_manager_user"/>
                                     <field name="travel_amount" force_save="True"/>
                                     <field name="final_amount"/>
                                 </list>
@@ -212,6 +224,7 @@
                                     <field name="card_employee_id" readonly="state != 'draft'"/>
                                     <field name="bank_id" readonly="state != 'draft'"/>
                                     <field name="cheque_number" readonly="state != 'draft'"/>
+                                    <field name="bank_authorization" readonly="1"/>
                                 </group>
                                 <group></group>
                             </group>

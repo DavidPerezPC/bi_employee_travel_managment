@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_bank_authorization_wizard_form" model="ir.ui.view">
+        <field name="name">bank.authorization.wizard.form</field>
+        <field name="model">bank.authorization.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Bank Authorization">
+                <group>
+                    <field name="file_upload" filename="file_name" required="1"/>
+                    <field name="file_name" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Process" 
+                    type="object" 
+                    name="action_bank_authorization_transfer" 
+                    class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_read_bank_authorizations" model="ir.actions.act_window">
+        <field name="name">Bank Authorizations</field>
+        <field name="res_model">bank.authorization.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-27 19:58+0000\n"
-"PO-Revision-Date: 2025-11-27 13:02-0700\n"
+"POT-Creation-Date: 2025-12-13 09:28+0000\n"
+"PO-Revision-Date: 2025-12-13 02:35-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_MX\n"
@@ -255,6 +255,11 @@ msgid "Approved Travel Request"
 msgstr "Solicitud de Viaja aprobada"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_download_attachment_wizard__attachment_id
+msgid "Attachment"
+msgstr "Adjunto"
+
+#. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__available_departure_date
 msgid "Available Departure Date"
 msgstr "Fecha de Regreso disponible"
@@ -273,6 +278,22 @@ msgid "Available Return Date"
 msgstr "Fecha de Regreso disponible"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__bank_authorization
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_bank_authorization_wizard_form
+msgid "Bank Authorization"
+msgstr "Autorización Bancaria"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_bank_authorization_wizard
+msgid "Bank Authorization Wizard"
+msgstr "Asistente para Validar Autorización Bancaria"
+
+#. module: bi_employee_travel_managment
+#: model:ir.actions.act_window,name:bi_employee_travel_managment.action_read_bank_authorizations
+msgid "Bank Authorizations"
+msgstr "Autorizaciones Bancarias"
+
+#. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__bank_id
 msgid "Bank Name"
 msgstr "Nombre del Banco"
@@ -281,6 +302,11 @@ msgstr "Nombre del Banco"
 #: model:ir.model.fields,help:bi_employee_travel_managment.field_travel_request__bank_id
 msgid "Bank associated with the cheque number"
 msgstr "Banco al que pertenece el Número de Cuenta Bancaria"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_travel_request__bank_authorization
+msgid "Bank authorization number for the transfer"
+msgstr "Número de autorización Bancaria para este Viaje"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__name
@@ -326,6 +352,8 @@ msgstr "Plazas Calzzapato"
 
 #. module: bi_employee_travel_managment
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.travel_request_reject_form
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_bank_authorization_wizard_form
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_get_date_form_wizard
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -383,6 +411,7 @@ msgid "Company to which the employee belongs"
 msgstr "Empresa a la que pertenece el empleado"
 
 #. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_get_date_form_wizard
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
 msgid "Confirm"
 msgstr "Confirmar"
@@ -440,12 +469,15 @@ msgid "Created Expense Sheet"
 msgstr "Crear Hoja de Gastos"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_bank_authorization_wizard__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_trip_purpose__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__create_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_download_attachment_wizard__create_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_get_date_form_wizard__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__create_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__create_uid
@@ -455,12 +487,15 @@ msgid "Created by"
 msgstr "Creado por"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_bank_authorization_wizard__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_trip_purpose__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__create_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_download_attachment_wizard__create_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_get_date_form_wizard__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__create_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__create_date
@@ -477,6 +512,7 @@ msgid "Currency"
 msgstr "Moneda"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_get_date_form_wizard__date
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
 msgid "Date"
 msgstr "Fecha"
@@ -522,12 +558,15 @@ msgid "Description"
 msgstr "Descripción"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_bank_authorization_wizard__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_trip_purpose__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__display_name
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_download_attachment_wizard__display_name
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_get_date_form_wizard__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__display_name
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__display_name
@@ -535,6 +574,11 @@ msgstr "Descripción"
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request_reject__display_name
 msgid "Display Name"
 msgstr "Nombre a mostrar"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_download_attachment_wizard
+msgid "Download Attachment Wizard"
+msgstr "Asistente para bajar Adjuntos"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__state__draft
@@ -599,6 +643,16 @@ msgid "Employees"
 msgstr "Empleados"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__employee_group_ids
+msgid "Employees In Group Travel"
+msgstr "Empleados en el Grupo"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_travel_request__employee_group_ids
+msgid "Employees associated with the group travel"
+msgstr "Empleados que componen el Grupo"
+
+#. module: bi_employee_travel_managment
 #: model:ir.model.fields,help:bi_employee_travel_managment.field_czp_trip_purpose__code
 msgid "Enter the trip purpose code"
 msgstr "Código del Propósito de Viaje"
@@ -656,6 +710,16 @@ msgid "Expenses Submitted"
 msgstr "Gastos procesados"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_bank_authorization_wizard__file_name
+msgid "File Name"
+msgstr "Nombre de Archivo"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_download_attachment_wizard__name
+msgid "Filename"
+msgstr "Nombre de archivo"
+
+#. module: bi_employee_travel_managment
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
 msgid "From"
 msgstr "Desde"
@@ -666,10 +730,20 @@ msgid "Generate Transfer"
 msgstr "Generar Transferencia"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model,name:bi_employee_travel_managment.model_get_date_form_wizard
+msgid "Get Date Form Wizard"
+msgstr "Asistente de Fecha"
+
+#. module: bi_employee_travel_managment
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_czp_zone_department_job_budget_search
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_search
 msgid "Group By"
 msgstr "Agrupar por"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__travel_type__grupal
+msgid "Grupal"
+msgstr "Grupal"
 
 #. module: bi_employee_travel_managment
 #: model:res.groups,name:bi_employee_travel_managment.hr_travel_manager_id
@@ -677,12 +751,15 @@ msgid "HR Manager (Travel)"
 msgstr "Gerente de RH (Viajes)"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_bank_authorization_wizard__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_trip_purpose__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_download_attachment_wizard__id
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_get_date_form_wizard__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__id
@@ -699,6 +776,16 @@ msgid ""
 msgstr ""
 "Indica si la cantidad del producto es dependiente de los días de duración "
 "del Viaje"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__travel_type__individual
+msgid "Individual"
+msgstr "Individual"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__is_manager_user
+msgid "Is Manager User"
+msgstr "Es Usuario Administrador"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__hr_job_id
@@ -735,12 +822,15 @@ msgid "Journals"
 msgstr "Diarios"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_bank_authorization_wizard__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_trip_purpose__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__write_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_download_attachment_wizard__write_uid
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_get_date_form_wizard__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__write_uid
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__write_uid
@@ -750,12 +840,15 @@ msgid "Last Updated by"
 msgstr "Actualizado por"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_bank_authorization_wizard__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_trip_purpose__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__write_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_download_attachment_wizard__write_date
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_get_date_form_wizard__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expense_line__write_date
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_mode__write_date
@@ -774,6 +867,11 @@ msgstr "Gerente"
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
 msgid "Manager Approval"
 msgstr "Aprobación del Gerente"
+
+#. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_list_inherited
+msgid "Mark as Done"
+msgstr "Buscar Autorizaciones"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__max_amount
@@ -901,6 +999,11 @@ msgid "Plazas associated with this zone"
 msgstr "Plazas relacionadas con la Zona"
 
 #. module: bi_employee_travel_managment
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_bank_authorization_wizard_form
+msgid "Process"
+msgstr "Procesar"
+
+#. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_expence__product_id
 msgid "Product"
 msgstr "Producto"
@@ -1025,6 +1128,17 @@ msgid "Search Travel Requests"
 msgstr "Búsqueda de Viajes"
 
 #. module: bi_employee_travel_managment
+#: model:ir.actions.act_window,name:bi_employee_travel_managment.action_get_date_form_wizard
+#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_get_date_form_wizard
+msgid "Select Date"
+msgstr "Seleccionar Fecha"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_travel_request__travel_type
+msgid "Select the type of travel"
+msgstr "Selecciona el Tipo de Viaje"
+
+#. module: bi_employee_travel_managment
 #: model_terms:ir.actions.act_window,help:bi_employee_travel_managment.view_budget_setup_action
 msgid "Specify Budget Rule for Particualr company and Product."
 msgstr ""
@@ -1047,7 +1161,7 @@ msgstr "Estado al que pertenece la Plaza"
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__state
 msgid "States"
-msgstr "Estatus"
+msgstr "Estados"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__to_street
@@ -1174,6 +1288,11 @@ msgid "Travel Request information"
 msgstr "Información de la Solicitud de Viaje"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__travel_type
+msgid "Travel Type"
+msgstr "Tipo de Viaje"
+
+#. module: bi_employee_travel_managment
 #: model:ir.model.fields.selection,name:bi_employee_travel_managment.selection__travel_request__state__treasury_department
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
 msgid "Treasury Department"
@@ -1208,6 +1327,11 @@ msgstr "Propósitos de Viaje"
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.report_travel_template
 msgid "Unit Price"
 msgstr "Precio"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_bank_authorization_wizard__file_upload
+msgid "Upload Authorization Document"
+msgstr "Cargar Documento de Autorización"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,help:bi_employee_travel_managment.field_hr_department__manager_ids

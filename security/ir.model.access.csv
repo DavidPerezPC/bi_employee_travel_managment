@@ -12,3 +12,4 @@ access_czp_zone_department_job_budget_line,access.czp.zone.department.job.budget
 access_czp_plazas,access.czp.plazas,bi_employee_travel_managment.model_czp_plazas,base.group_user,1,1,1,1
 access_czp_trip_purpose,access.czp.trip.purpose,bi_employee_travel_managment.model_czp_trip_purpose,base.group_user,1,1,1,1
 access_get_date_form_wizard,access.get.date.form.wizard,bi_employee_travel_managment.model_get_date_form_wizard,base.group_user,1,1,1,1
+access_bank_authorization_wizard,access.bank.authorization.wizard,bi_employee_travel_managment.model_bank_authorization_wizard,base.group_user,1,1,1,1

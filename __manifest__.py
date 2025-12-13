@@ -52,6 +52,7 @@ Employee Expenses
             'views/hr_department.xml',
             'wizard/reject_reason_views.xml',
             'wizard/get_date_form_wizard.xml',
+            'wizard/bank_authorization_wizard.xml',
             'report/employee_travel_report.xml',
             'report/report_views.xml',],
     # 'assets': {

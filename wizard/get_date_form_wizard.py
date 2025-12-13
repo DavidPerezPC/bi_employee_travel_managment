@@ -14,3 +14,19 @@ class GetDateFormWizard(models.TransientModel):
         # return {
         #     'type': 'ir.actions.act_window_close',
         # }
+
+class BankAuthorizationWizard(models.TransientModel):
+    _name = 'bank.authorization.wizard'
+    _description = 'Bank Authorization Wizard'
+    
+    file_upload = fields.Binary(string='Upload Authorization Document', required=True)
+    file_name = fields.Char(string='File Name')
+
+    def action_bank_authorization_transfer(self):
+        """Return the selected date"""
+        self.ensure_one()
+        self.env.context = dict(self.env.context or {}, selected_date=self.date)
+        return self.env['travel.request'].action_generate_transfer()
+        return {
+            'type': 'ir.actions.act_window_close',
+        }

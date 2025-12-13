@@ -113,10 +113,38 @@ class My_travel_request(models.Model):
     over_budget = fields.Boolean(string="Over Budget",compute="_check_original_budget")
     company_id = fields.Many2one(comodel_name='res.company',string="Company",required=True,readonly=True,default=lambda self: self.env.company)
     count_journal = fields.Integer('Count Invoice',compute="_count_pentaly")
-    journal_id = fields.Many2one(comodel_name='account.journal',string="Expense Journal",domain=[('type', '=', 'purchase')], store=True,
+    journal_id = fields.Many2one(
+        comodel_name='account.journal',
+        string="Expense Journal",domain=[('type', '=', 'purchase')], 
+        store=True,
         check_company=True)
     exp_account_ids = fields.Many2many('account.move',string="Journals")
+    bank_authorization = fields.Char(string="Bank Authorization",
+                                     help="Bank authorization number for the transfer",
+                                     readonly=True)
+    travel_type = fields.Selection(
+        [('individual', 'Individual'), ('grupal', 'Grupal')], 
+        string="Travel Type", 
+        help="Select the type of travel",
+        default='individual',
+        required=True
+        )
+    employee_group_ids = fields.Many2many(
+        'hr.employee', 
+        string="Employees In Group Travel",
+        help="Employees associated with the group travel",
+        domain="[('active', '=', True), ('employee_status', '=', 'active')]"
+        )   
+    is_manager_user = fields.Boolean(string="Is Manager User", 
+                                     compute="_compute_is_manager_user",
+                                     store=False)
 
+    def _compute_is_manager_user(self):
+        for rec in self:
+            if rec.env.user.has_group('bi_employee_travel_managment.hr_travel_manager_id'):
+                rec.is_manager_user = True
+            else:
+                rec.is_manager_user = False 
 
     # @api.model
     # def _get_employee_bank(self):
@@ -553,7 +581,11 @@ class My_travel_request(models.Model):
             #"url": f"/bi_employee_travel_managment/download/{attachment.id}?filename={attachment.name}",
             "target": "self",
         }
-    
+
+    def action_treasury_department_done(self):
+        action = self.env['ir.actions.act_window']._for_xml_id('bi_employee_travel_managment.action_read_bank_authorizations')
+        return action
+
 # models/download_wizard.py
 from odoo import models, fields, api
 
@@ -595,6 +627,17 @@ class TravelExpenseLine(models.Model):
     duration_dependant = fields.Boolean(string="Duration Dependant", 
                                         related='product_id.duration_dependant', 
                                         store=True)
+    # is_manager_user = fields.Boolean(string="Is Manager User",
+    #                                  #related='travel_exp_id.is_manager_user',
+    #                                  compute='_compute_is_manager_user',
+    #                                  store=False)
+
+    # def _compute_is_manager_user(self):
+    #     for rec in self:
+    #         if rec.env.user.has_group('bi_employee_travel_managment.hr_travel_manager_id'):
+    #             rec.is_manager_user = True
+    #         else:
+    #             rec.is_manager_user = False 
 
     @api.onchange('product_id', 'travel_qty')
     def onchange_product_id(self):

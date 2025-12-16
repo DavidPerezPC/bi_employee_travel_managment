@@ -48,5 +48,58 @@
 		    </field>
 		</record>
 
+		<!-- Added for travel expense report -->
+		<record id="view_my_expenses_tree_inherit_travel" model="ir.ui.view">
+			<field name="name">Hr Expense Tree View Inherit Travel</field>
+			<field name="model">hr.expense</field>
+			<field name="inherit_id" ref="hr_expense.view_my_expenses_tree"/>
+			<field name="arch" type="xml">
+				<field name="date" position="before">
+					<field name="travel_id"/>
+				</field>
+			</field>
+		</record>
+		
+		<record id="hr_expense_view_form_inherit_travel_vat" model="ir.ui.view">
+			<field name="name">Hr Expense Form View Inherit Travel VAT</field>
+			<field name="model">hr.expense</field>
+			<field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//form/sheet/div[1]" position="replace">
+                    <div class="oe_title">
+                        <h1>
+							<group>
+								<group>
+									<label for="name"/>
+                            		<field name="name" nolabel="1" placeholder="e.g. Lunch with Customer" readonly="not is_editable"/>
+								</group>
+								<group>
+									<label for="travel_id"/>
+									<field name="travel_id" nolabel="1"/>
+								</group>
+							</group>
+                        </h1>
+                    </div>				
+				</xpath>
+				<field name="date" position="after">
+					<field name="card_number" readonly="1"/>
+					<field name="vat"/>
+				</field>
+				<field name="vendor_id" position="attributes">
+					<attribute name="invisible">0</attribute>
+				</field>		
+			</field>
+		</record>
+
+		<!--record id="hr_expense_form_view_inherit_sale_order_invisible" model="ir.ui.view">
+			<field name="name">Hr Expense Form View Inherit Sale Order Invisible</field>
+			<field name="model">hr.expense</field>
+			<field name="inherit_id" ref="sale_expense.hr_expense_form_view_inherit_sale_expense"/>
+			<field name="arch" type="xml">
+				<field name="sale_order_id" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</field>
+			</field>
+		</record>-->
 	</data>
 </odoo>

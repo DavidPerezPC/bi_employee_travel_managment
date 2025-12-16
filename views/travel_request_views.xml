@@ -6,6 +6,7 @@
         <field name="priority">2</field>
         <field name="arch" type="xml">
             <list string="Employee Travel Request">
+                <field name="name"/>
                 <field name="employee_id"/>
                 <field name="czp_company_id"/>
                 <field name="department_manager_id"/>
@@ -28,12 +29,27 @@
         <field name="arch" type="xml">
             <xpath expr="//list" position="inside">
                 <header>
-                    <button name="action_get_date_from_wizard" string="Generate Transfer" type="object" class="btn-primary"/>
+                    <button name="action_get_date_from_wizard" 
+                        string="Generate Transfer" 
+                        type="object" 
+                        class="btn-primary"
+                        groups="bi_employee_travel_managment.hr_travel_manager_id"
+                    />
                     <button name="action_treasury_department_done" 
                         string="Mark as Done" 
                         type="object" 
                         class="btn-primary"
-                        display="always"/>
+                        display="always"
+                        groups="bi_employee_travel_managment.hr_travel_manager_id"
+                    />
+                    <button name="action_add_expenses_from_bank" 
+                        string="Read Expenses"
+                        help="Create expense from bank statement lines linked to this travel request" 
+                        type="object" 
+                        class="btn-primary"
+                        display="always"
+                        groups="bi_employee_travel_managment.hr_travel_manager_id"
+                    />                    
                 </header>
             </xpath>
             <xpath expr="//field[@name='czp_company_id']" position="after">
@@ -41,6 +57,27 @@
             </xpath>
         </field>
     </record>
+
+    <!--ADDED TOO-->
+    <!--record id="view_travel_req_addexpenses_inherited" model="ir.ui.view">
+        <field name="name">travel.request.list.addexpenses.inherited</field>
+        <field name="model">travel.request</field>
+        <field name="inherit_id" ref="view_travel_req_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button name="action_add_expenses_from_bank" 
+                        string="Read Expenses"
+                        help="Create expense from bank statement lines linked to this travel request" 
+                        type="object" 
+                        class="btn-primary"
+                        display="always"
+                        groups="bi_employee_travel_managment.hr_travel_manager_id"
+                    />
+                </header>
+            </xpath>
+        </field>
+    </record-->
 
     <record id="view_travel_req_form" model="ir.ui.view">
         <field name="name">travel.request.form</field>
@@ -91,6 +128,8 @@
                             <field name="employee_id" readonly="state != 'draft'"/>
                             <field name="department_manager_id" readonly="1"/>
                             <field name="default_approver" readonly="state != 'draft'" domain="default_approver_domain"/>
+                            <field name="plaza_id" readonly="state != 'draft'" 
+                                help="Plaza associated with the travel request to pickup the Zone"/>    
                             <field name="czp_zone_id" readonly="state != 'draft'"/>
                         </group>
                         <group>
@@ -305,6 +344,21 @@
         </field>
     </record>
 
+    <!--ADDED TOO-->
+    <record id="action_travel_req_addexpenses_frombank" model="ir.actions.act_window">
+        <field name="name">Add Expenses from Bank</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">travel.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_travel_req_list_inherited"/>
+        <!--field name="view_id" ref="view_travel_req_addexpenses_inherited"/-->
+        <field name="domain">[('state','in',['approved','submitted','returned'])]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create"></p>
+            <p></p>
+        </field>
+    </record>
+
     <menuitem id="travel_main_menu"
               name="Travel"
               sequence="22"/>
@@ -333,6 +387,14 @@
               parent="travel_sub_menu"
               name="Travel Request To Bank Transfer"
               sequence="4"
+              groups="bi_employee_travel_managment.hr_travel_manager_id"/>
+
+    <!--ADDED TOO-->
+    <menuitem action="action_travel_req_addexpenses_frombank"
+              id="menu_travel_request_addexpenses_frombank"
+              parent="travel_sub_menu"
+              name="Add Expenses from Bank"
+              sequence="5" 
               groups="bi_employee_travel_managment.hr_travel_manager_id"/>
     
 

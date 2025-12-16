@@ -2,7 +2,7 @@
 # Part of Browseinfo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'HR Employee Travel Expense in Odoo ',
-    'version': '18.0.0.1',
+    'version': '18.0.0.2',
     'category': 'human resources',
     'summary': 'Apps for Hr Travel Expense Travel Expense reimbursement Employee Travel Expenses for Employee Travel Request for Employee Expenses Travel Expense voucher employee Travel expense Advance HR Travel Expense request HR Expenses of travel HR Expenses request',
     'description': """Employee Travel and Travel Expense Manage 
@@ -53,6 +53,7 @@ Employee Expenses
             'wizard/reject_reason_views.xml',
             'wizard/get_date_form_wizard.xml',
             'wizard/bank_authorization_wizard.xml',
+            'wizard/bank_expenses_statement.xml',
             'report/employee_travel_report.xml',
             'report/report_views.xml',],
     # 'assets': {

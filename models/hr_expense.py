@@ -14,8 +14,25 @@ class InheritAccountMove(models.Model):
 class HrExpense(models.Model):
     _inherit = "hr.expense"
 
-    travel_id = fields.Many2one('travel.request')
+    travel_id = fields.Many2one('travel.request', string='Travel Request',
+                                help="Link to the travel request associated with this expense",
+                                domain=[('state', 'in', ['approved','submitted','returned'])])
     travel_expence_id = fields.Many2one('travel.request')
+    card_number = fields.Char(string='Card Number', 
+                              index=True, 
+                              help="The Card Number associated with this expense"
+                              )
+    vat = fields.Char(string='Tax ID', 
+                      index=True, 
+                      help="The Tax Identification Number for this expense"
+                      )
+ 
+
+    @api.onchange('travel_id')
+    def onchange_travel_id(self):
+        for record in self:
+            if record.travel_id:
+                record.employee_id = record.travel_id.employee_id.id
 
     @api.model
     def default_get(self, fields):

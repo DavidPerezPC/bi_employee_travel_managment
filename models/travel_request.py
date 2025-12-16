@@ -24,6 +24,14 @@ class My_travel_request(models.Model):
     _name = "travel.request"
     _description = "My Travel Request"
 
+    def _get_default_country(self):
+        country = self.env.ref('base.mx')
+        return country
+    
+    def _get_default_state(self):
+        state = self.env.ref('base.state_mx_sin')  # Sinaloa
+        return state
+    
     name = fields.Char(string="Name", readonly=True)
     employee_id = fields.Many2one(
         'hr.employee', 
@@ -48,7 +56,10 @@ class My_travel_request(models.Model):
                                      string="Company", store=True)
     department_manager_id = fields.Many2one('hr.employee', string="Manager")
     czp_zone_id = fields.Many2one('czp.zone', string="Zone", required=True)
-    #plaza_id = fields.Many2one('czp.plazas', string="Plaza", required=True)
+    plaza_id = fields.Many2one('czp.plazas', 
+                               string="Plaza",
+                               help="Plaza associated with the travel request to pickup the Zone"
+                               )
     plaza_ids = fields.Many2many('czp.plazas', string="Plazas", required=True)
     plaza_domain = fields.Char(string="Plaza Domain", compute="_compute_plaza_domain")
     department_id = fields.Many2one('hr.department', string="Department")
@@ -69,18 +80,20 @@ class My_travel_request(models.Model):
     trip_purpose_id = fields.Many2one('czp.trip.purpose', string="Trip Purpose", required=True)
     project_id = fields.Many2one('project.task', string="Project" )
     account_analytic_id = fields.Many2one('account.analytic.account', string="Analytic Account")
-    from_city = fields.Char('City', required=True)
-    from_state_id = fields.Many2one('res.country.state', string="State",required=True)
-    from_country_id = fields.Many2one('res.country', string="Country", required=True)
+    from_city = fields.Char('City', required=True, default='CULIACAN')
+    from_state_id = fields.Many2one('res.country.state', string="State",required=True,
+                                    default=_get_default_state)
+    from_country_id = fields.Many2one('res.country', string="Country", required=True
+                                      , default=_get_default_country)
     to_street = fields.Char('Street')
     to_street_2 = fields.Char('Street2')
     to_city = fields.Char('city')
     to_state_id = fields.Many2one('res.country.state', string="state")
-    to_country_id = fields.Many2one('res.country', string="country")
+    to_country_id = fields.Many2one('res.country', string="country", default=_get_default_country)
     to_zip_code = fields.Char('Zip')
     req_departure_date = fields.Datetime(string="Request Departure Date", required=True)
     req_return_date = fields.Datetime(string="Request Return Date", required=True)
-    req_dispersal_date  = fields.Datetime(string="Request Dispersal Date", required=True)
+    req_dispersal_date  = fields.Datetime(string="Request Dispersal Date")
     days = fields.Char('Days', compute="_compute_days")
     req_travel_mode_id = fields.Many2one('travel.mode', string="Request Mode Of Travel")
     return_mode_id = fields.Many2one('travel.mode', string="Return Mode of Travel")
@@ -105,8 +118,13 @@ class My_travel_request(models.Model):
     expense_ids = fields.One2many('hr.expense', 'travel_expence_id', string="Expenses")
     travel_expense_ids = fields.One2many('travel.expense.line', 'travel_exp_id', string="Employee Travel Expense")
     state = fields.Selection(
-        [('draft', 'Draft'), ('confirmed', 'Confirmed'),('manager_approval','Manager Approval'), ('treasury_department','Treasury Department'), ('approved', 'Approved'), ('rejected', 'Rejected'),
-         ('returned', 'Returned'), ('submitted', 'Expenses Submitted')], default="draft", string="States")
+        [('draft', 'Draft'), 
+         ('confirmed', 'Confirmed'),
+         ('manager_approval','Manager Approval'), 
+         ('treasury_department','Treasury Department'), 
+         ('approved', 'Approved'), ('rejected', 'Rejected'),
+         ('submitted', 'Expenses Submitted'),
+         ('returned', 'Returned'), ], default="draft", string="States")
     original_budget = fields.Monetary(string="Original Budget",compute="_check_original_budget")
     modify_budget = fields.Monetary(string="Modify Budget")
     within_budget = fields.Boolean(string="Within Budget",compute="_check_original_budget")
@@ -213,6 +231,14 @@ class My_travel_request(models.Model):
 
 
 
+    @api.onchange('plaza_id')
+    def onchange_plaza_id(self):
+        if self.plaza_id and not self.czp_zone_id:
+            self.czp_zone_id = self.plaza_id.czp_zone_id.id
+            if not self.plaza_ids or self.plaza_id.id not in self.plaza_ids.ids:
+                self.plaza_ids = [(6, 0, [self.plaza_id.id])]
+        return
+    
     @api.onchange('employee_id')
     def onchange_employee(self):
         self.department_manager_id = self.employee_id.parent_id.id
@@ -585,6 +611,12 @@ class My_travel_request(models.Model):
     def action_treasury_department_done(self):
         action = self.env['ir.actions.act_window']._for_xml_id('bi_employee_travel_managment.action_read_bank_authorizations')
         return action
+
+    def action_add_expenses_from_bank(self):
+        action = self.env['ir.actions.act_window']._for_xml_id('bi_employee_travel_managment.action_read_bank_expenses_statement')
+        #action['context'] = dict(self.env.context or {}, default_travel_request_id=self.id)
+        return action
+
 
 # models/download_wizard.py
 from odoo import models, fields, api

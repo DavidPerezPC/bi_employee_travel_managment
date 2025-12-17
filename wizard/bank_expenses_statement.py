@@ -76,7 +76,7 @@ class BankAuthorizationWizard(models.TransientModel):
                     travel = travel[0]  # or some other logic
 
                 self.env['hr.expense'].create({
-                    'name': receipt,
+                    'name': notes[0],
                     'total_amount_currency': amount,
                     'payment_mode': 'company_account',
                     'date': date,
@@ -98,8 +98,8 @@ class BankAuthorizationWizard(models.TransientModel):
                 #     travel.write({'bank_authorization': row[13],
                 #                   'state': 'approved'  
                 #                   })
-                file_content.append(row)
-                print(row)
+                #file_content.append(row)
+                #print(row)
             
             # Now 'file_content' holds your data (e.g., a list of lists)
             # You can process this data as needed

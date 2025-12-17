@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-16 17:01+0000\n"
-"PO-Revision-Date: 2025-12-16 10:07-0700\n"
+"POT-Creation-Date: 2025-12-17 04:13+0000\n"
+"PO-Revision-Date: 2025-12-16 21:17-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_MX\n"
@@ -343,6 +343,11 @@ msgstr "Regla de Presupuesto"
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_budget_setup_list
 msgid "Budget Setup"
 msgstr "Configuración del Presupuesto"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__czp_zone_id
+msgid "Budget Zone"
+msgstr "Zona para Presupuesto"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__budget_ids
@@ -1019,7 +1024,6 @@ msgstr "El pago ya fue realizado para esta solicitud de viaje"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_budget_rule__plaza_id
-#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__plaza_id
 msgid "Plaza"
 msgstr ""
 
@@ -1027,12 +1031,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__plaza_domain
 msgid "Plaza Domain"
 msgstr ""
-
-#. module: bi_employee_travel_managment
-#: model:ir.model.fields,help:bi_employee_travel_managment.field_travel_request__plaza_id
-#: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_travel_req_form
-msgid "Plaza associated with the travel request to pickup the Zone"
-msgstr "Plaza principal que se visitará para determinar la Zona"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone__plaza_ids
@@ -1417,6 +1415,11 @@ msgid "Visa Agent"
 msgstr "Agente de Visa"
 
 #. module: bi_employee_travel_managment
+#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__czp_zone_ids
+msgid "Visit Zones"
+msgstr "Zonas a Visitar"
+
+#. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__within_budget
 msgid "Within Budget"
 msgstr "Dentro de Prepuesto"
@@ -1437,7 +1440,6 @@ msgstr "CP"
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_budget__czp_zone_id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget__czp_zone_id
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_czp_zone_department_job_budget_line__czp_zone_id
-#: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__czp_zone_id
 #: model_terms:ir.ui.view,arch_db:bi_employee_travel_managment.view_czp_zone_department_job_budget_search
 msgid "Zone"
 msgstr "Zona"
@@ -1504,6 +1506,11 @@ msgstr "Zona a la que pertenece la Plaza"
 #: model:ir.actions.act_window,name:bi_employee_travel_managment.action_czp_zone
 msgid "Zones"
 msgstr "Zonas"
+
+#. module: bi_employee_travel_managment
+#: model:ir.model.fields,help:bi_employee_travel_managment.field_travel_request__czp_zone_ids
+msgid "Zones to visit associated with the travel request"
+msgstr "Zonas que se visitaran en este viaje"
 
 #. module: bi_employee_travel_managment
 #: model:ir.model.fields,field_description:bi_employee_travel_managment.field_travel_request__to_city

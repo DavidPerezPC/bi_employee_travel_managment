@@ -55,11 +55,16 @@ class My_travel_request(models.Model):
                                      related='employee_id.czp_company_id', 
                                      string="Company", store=True)
     department_manager_id = fields.Many2one('hr.employee', string="Manager")
-    czp_zone_id = fields.Many2one('czp.zone', string="Zone", required=True)
-    plaza_id = fields.Many2one('czp.plazas', 
-                               string="Plaza",
-                               help="Plaza associated with the travel request to pickup the Zone"
-                               )
+    czp_zone_ids = fields.Many2many('czp.zone', 
+                                    string="Visit Zones", 
+                                    help="Zones to visit associated with the travel request",
+                                    readonly=True)
+    czp_zone_id = fields.Many2one('czp.zone', string="Budget Zone", required=True)
+    #plaza_id = fields.Many2one('czp.plazas', 
+    #                           string="Plaza",
+    #                           help="Plaza associated with the travel request to pickup the Zone"
+    #                           )
+    
     plaza_ids = fields.Many2many('czp.plazas', string="Plazas", required=True)
     plaza_domain = fields.Char(string="Plaza Domain", compute="_compute_plaza_domain")
     department_id = fields.Many2one('hr.department', string="Department")
@@ -266,11 +271,34 @@ class My_travel_request(models.Model):
             self.req_dispersal_date = self.req_departure_date
         return
 
-    @api.depends('czp_zone_id')
+    #ASÍ ESTABA, SE SOLICITA EL CAMBIO PARA QUE LA ZONA A ELIGIR PARA PRESPUESTO SEA UNA 
+    #DE LAS ZONAS A LAS QUE PERTECEN LAS PLAZAS SELECCIONADAS
+    @api.onchange('plaza_ids')
+    def onchange_plaza_ids(self):
+        if self.plaza_ids:
+            zone_ids = self.plaza_ids.mapped('czp_zone_id').ids
+            self.czp_zone_ids = [(6, 0, zone_ids)]
+            if self.czp_zone_id and self.czp_zone_id.id not in zone_ids:
+                self.czp_zone_id = False
+            #return {'domain': {'czp_zone_id': [('id', 'in', self.czp_zone_ids.ids)]}}
+        else:
+            self.czp_zone_id = False
+            self.czp_zone_ids = [(6, 0, [])]
+        #    return {'domain': {'czp_zone_id': []}}
+        
+    # @api.depends('czp_zone_id')
+    # def _compute_plaza_domain(self):
+    #     for rec in self:
+    #         if rec.czp_zone_id:
+    #             rec.plaza_domain = [('id', 'in', rec.czp_zone_id.plaza_ids.ids)]
+    #         else:
+    #             rec.plaza_domain = []
+
+    @api.depends('plaza_ids')
     def _compute_plaza_domain(self):
         for rec in self:
-            if rec.czp_zone_id:
-                rec.plaza_domain = [('id', 'in', rec.czp_zone_id.plaza_ids.ids)]
+            if rec.czp_zone_ids:
+                rec.plaza_domain = [('id', 'in', rec.czp_zone_ids.ids)]
             else:
                 rec.plaza_domain = []
 

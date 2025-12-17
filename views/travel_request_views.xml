@@ -124,13 +124,16 @@
                     </h2>
                     <group>
                         <group>
+                            <field name="plaza_domain" invisible="1"/>
                             <field name="default_approver_domain" invisible="1"/>
                             <field name="employee_id" readonly="state != 'draft'"/>
                             <field name="department_manager_id" readonly="1"/>
                             <field name="default_approver" readonly="state != 'draft'" domain="default_approver_domain"/>
-                            <field name="plaza_id" readonly="state != 'draft'" 
-                                help="Plaza associated with the travel request to pickup the Zone"/>    
-                            <field name="czp_zone_id" readonly="state != 'draft'"/>
+                            <field name="plaza_ids" readonly="state != 'draft'" widget="many2many_tags"/>
+                            <!--field name="plaza_id" readonly="state != 'draft'" 
+                                help="Plaza associated with the travel request to pickup the Zone"/--> 
+                            <field name="czp_zone_ids" readonly="1" widget="many2many_tags"/>   
+                            <field name="czp_zone_id" readonly="state != 'draft'" domain="plaza_domain"/>
                         </group>
                         <group>
                             <field name="department_id" readonly="1" force_save="True"/>
@@ -182,8 +185,9 @@
                                 </group>
                                 <group>
                                     <label for="to_street" string="To"/>
-                                    <field name="plaza_domain" invisible="1"/>
-                                    <field name="plaza_ids" readonly="state != 'draft'" domain="plaza_domain" widget="many2many_tags"/>
+                                    <!--field name="plaza_domain" invisible="1"/>
+                                    <!field name="plaza_ids" readonly="state != 'draft'" domain="plaza_domain" widget="many2many_tags"/-->
+                                    <field name="plaza_ids" readonly="1" widget="many2many_tags"/>
                                     <div class="o_address_format">
                                         <field name="to_street" placeholder="Street..." class="o_address_street"
                                                readonly="state != 'draft'"

@@ -21,17 +21,17 @@
 			<field name="model">hr.expense</field>
 			<field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
 			<field name="arch" type="xml">
-			<xpath expr="//t[@groups='hr_expense.group_hr_expense_team_approver']" position="replace">		
-				<field name="employee_id" groups="!hr.group_hr_user"
-	               context="{'default_company_id': company_id}" widget="many2one_avatar_employee"
-	               options="{'relation': 'hr.employee.public', 'no_create': True}"
-	               readonly="not is_editable or context.get('employee_id') or context.get('default_employee_id')"/>
-				<field name="employee_id" groups="hr.group_hr_user"
-	                   context="{'default_company_id': company_id}" widget="many2one_avatar_employee"
-	                   options="{'relation': 'hr.employee'}"
-	               readonly="not is_editable or context.get('employee_id') or context.get('default_employee_id')"/>
-			</xpath>
-			    <field name="payment_mode" position="replace">
+				<xpath expr="//t[@groups='hr_expense.group_hr_expense_team_approver']" position="replace">		
+					<field name="employee_id" groups="!hr.group_hr_user"
+					context="{'default_company_id': company_id}" widget="many2one_avatar_employee"
+					options="{'relation': 'hr.employee.public', 'no_create': True}"
+					readonly="not is_editable or context.get('employee_id') or context.get('default_employee_id')"/>
+					<field name="employee_id" groups="hr.group_hr_user"
+						context="{'default_company_id': company_id}" widget="many2one_avatar_employee"
+						options="{'relation': 'hr.employee'}"
+					readonly="not is_editable or context.get('employee_id') or context.get('default_employee_id')"/>
+				</xpath>
+				<field name="payment_mode" position="replace">
 			    	 <field name="payment_mode" widget="radio" readonly="sheet_id or context.get('adv_payment') == True" /> 
 			    </field>
 		    </field>
@@ -87,19 +87,37 @@
 				</field>
 				<field name="vendor_id" position="attributes">
 					<attribute name="invisible">0</attribute>
-				</field>		
+				</field>
+				<xpath expr="//sheet" position="inside">
+					<notebook>
+						<page string="Información SAT (CFDI)" name="cfdi_details">
+							<field name="cfdi_line_ids" readonly="1">
+								<list xml_id="cfdi_list_view">
+									<field name="fecha"/>
+									<field name="rfc_emisor"/>
+									<field name="name"/>
+									<field name="uuid"/>
+									<field name="total" sum="Total XMLs"/>
+								</list>
+							</field>
+						</page>
+					</notebook>
+				</xpath>		
 			</field>
 		</record>
 
-		<!--record id="hr_expense_form_view_inherit_sale_order_invisible" model="ir.ui.view">
+		<record id="hr_expense_form_view_inherit_sale_order_invisible" model="ir.ui.view">
 			<field name="name">Hr Expense Form View Inherit Sale Order Invisible</field>
 			<field name="model">hr.expense</field>
 			<field name="inherit_id" ref="sale_expense.hr_expense_form_view_inherit_sale_expense"/>
 			<field name="arch" type="xml">
+				<field name="sale_order_id" position="replace">
+					<field name="receipt_authorization" readonly="1"/>
+				</field>
 				<field name="sale_order_id" position="attributes">
 					<attribute name="invisible">1</attribute>
 				</field>
 			</field>
-		</record>-->
+		</record>
 	</data>
 </odoo>

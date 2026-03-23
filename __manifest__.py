@@ -39,7 +39,7 @@ Employee Expenses
     'website': 'https://www.browseinfo.com/demo-request?app=bi_employee_travel_managment&version=18&edition=Community',
     "price": 30,
     "currency": 'EUR',
-    'depends': ['base','hr','hr_expense','project','hr_contract','calzzapato_masterdata'],
+    'depends': ['base','hr','hr_expense','mail','project','hr_contract','calzzapato_masterdata', 'sale_expense'],
     'data': ['security/ir.model.access.csv',
             'security/groups.xml',
             'data/employee_travel_sequencer_data.xml',

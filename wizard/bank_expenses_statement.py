@@ -38,6 +38,7 @@ class BankAuthorizationWizard(models.TransientModel):
             data_file = io.StringIO(binary_data.decode("utf-8"))
             data_file.seek(0)
             
+            HrExpense = self.env['hr.expense']
             # Example: Reading a CSV file
             csv_reader = csv.reader(data_file, delimiter=';')
             file_content = []
@@ -45,7 +46,7 @@ class BankAuthorizationWizard(models.TransientModel):
                 row_ = row[0].split(',')
                 if not row_[0].isdigit():
                     continue
-                receipt = row_[3]
+                
                 if row_[5] == '':
                     amount = -float(row_[6])
                 else:
@@ -59,6 +60,7 @@ class BankAuthorizationWizard(models.TransientModel):
                 notes = row_[4].split(' | ')
                 card = None
                 rfc = None
+                receipt_number = row_[3]
                 for note in notes:
                     if not card:    
                         card = self._get_card_number_rfc(note)
@@ -66,7 +68,18 @@ class BankAuthorizationWizard(models.TransientModel):
                             card = self._get_card_number_rfc(note, keyword='mxn en ')
                     if not rfc:
                         rfc = self._get_card_number_rfc(note, keyword='RFC ', length=13)
-    
+
+                    if not receipt_number:
+                        receipt_number = self._get_card_number_rfc(note, keyword='Recibo # ', length=13)
+                        if not receipt_number:
+                            receipt_number = self._get_card_number_rfc(note, keyword='Autorización: ', length=13)
+
+                if HrExpense.search([('card_number', '=', card), 
+                                  ('receipt_authorization', '=', receipt_number),
+                                  ('total_amount', '=', amount)
+                                ]):
+                    continue
+
                 travel = travels.filtered(lambda t: t.cheque_number == card \
                                           and date >= t.req_dispersal_date.date()  \
                                           and date <= t.req_return_date.date()
@@ -87,6 +100,7 @@ class BankAuthorizationWizard(models.TransientModel):
                     'vat': rfc.replace(' ', '') if rfc else False,
                     'description': ','.join(notes),
                     'state': 'reported',
+                    'receipt_authorization': receipt_number if receipt_number else False,
                 })
                 # daparture_date = row[10]
                 # travel = travels.filtered(lambda t: t.cheque_number == cheque_number \

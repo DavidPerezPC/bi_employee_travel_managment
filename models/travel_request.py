@@ -4,6 +4,7 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime, timedelta,date
+import pytz
 import base64
 import csv
 from io import StringIO
@@ -22,6 +23,7 @@ class travel_expence(models.Model):
 
 class My_travel_request(models.Model):
     _name = "travel.request"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "My Travel Request"
 
     def _get_default_country(self):
@@ -129,7 +131,7 @@ class My_travel_request(models.Model):
          ('treasury_department','Treasury Department'), 
          ('approved', 'Approved'), ('rejected', 'Rejected'),
          ('submitted', 'Expenses Submitted'),
-         ('returned', 'Returned'), ], default="draft", string="States")
+         ('returned', 'Returned'), ], default="draft", string="States", trancking=True)
     original_budget = fields.Monetary(string="Original Budget",compute="_check_original_budget")
     modify_budget = fields.Monetary(string="Modify Budget")
     within_budget = fields.Boolean(string="Within Budget",compute="_check_original_budget")
@@ -268,7 +270,7 @@ class My_travel_request(models.Model):
     @api.onchange('req_departure_date')
     def _onchange_req_departure_date(self):
         if not self.req_dispersal_date:
-            self.req_dispersal_date = self.req_departure_date
+            self.req_dispersal_date = self.req_date if self.req_date else self.req_departure_date
         return
 
     #ASÍ ESTABA, SE SOLICITA EL CAMBIO PARA QUE LA ZONA A ELIGIR PARA PRESPUESTO SEA UNA 
@@ -325,6 +327,7 @@ class My_travel_request(models.Model):
             vals['name'] = seq
             vals['request_by'] = vals['employee_id']
             vals['req_date'] = fields.datetime.now()
+            vals['req_dispersal_date'] = vals.get('req_date', False)
             project_obj = self.env['project.task'].browse(vals['project_id'])
         return super(My_travel_request, self).create(vals_list)
 
@@ -361,6 +364,70 @@ class My_travel_request(models.Model):
     def action_confirm(self):
         self.write({'state': 'confirmed', 'confirm_date': fields.datetime.now(),
                     'confirm_by': self.env.user.id})
+        base_url = self.get_base_url()
+        for rec in self:
+            record_url = f"{base_url}/web#id={rec.id}&model=travel.request&view_type=form"
+            template_id = self.env['ir.model.data']._xmlid_lookup('bi_employee_travel_managment.approved_travel_expense_request_email_template')[1]
+            email_template_obj = self.env['mail.template'].browse(template_id)
+            if template_id:
+                values = email_template_obj._generate_template([rec.id], ('subject', 'body_html', 'email_from', 'email_to', 'partner_to', 'email_cc', 'reply_to', 'scheduled_date'))[rec.id]
+                values['subject'] = "Confirmación de Solicitud de Viaje - " + rec.name
+                values['email_from'] = rec.env.user.email 
+                values['email_to'] = rec.default_approver.login
+                values['author_id'] = rec.env.user.partner_id.id
+                values['res_id'] = False
+                values['body_html'] = '''
+                    <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">
+                        <p>Estimado ''' + rec.default_approver.name + ''',</p>
+                        <br/>
+                        <p>Usted está autorizado para aprobar la Solicitud de Viaje ''' + rec.name + '''.</p>
+                        <p>Para : ''' + rec.employee_id.name + ''' </p>
+                        <p>Detalles de la Solicitud: <a href="''' + record_url + '''">Ver Solicitud de Viaje</a></p>
+                        <br/>
+                        <p>Gracias</p>
+                    </div>
+                '''
+                # pdf = self.env.ref('bi_product_low_stock_notification.action_low_stock_report')._render([res.id])[0]
+                mail_mail_obj = self.env['mail.mail']
+                msg_id = mail_mail_obj.create(values)
+                if msg_id:
+                    msg_id.send()
+            
+            # # 2. Obtener los destinatarios para la notificación interna (en este caso, el aprobador)
+            # recipient_ids = [rec.default_approver.id] if rec.default_approver else []
+            # if recipient_ids:
+            #     body = f"""
+            #         <p>Hola, tienes la Solicitud de Viaje <strong>{rec.name}</strong>
+            #         por confirmar en 
+            #         <a href="{record_url}">Solicitud de Viaje</a>.
+            #         </p>
+            #     """
+                
+            #     # 3. Enviar como notificación interna
+            #     rec.message_post(
+            #         body=body,
+            #         partner_ids=recipient_ids,
+            #         message_type='notification', # Esto lo marca como notificación
+            #         subtype_xmlid='mail.mt_comment'
+            #     )     
+
+            # 1. Definir quién recibe la actividad (ID del usuario, no del partner)
+            responsible_user_id = rec.default_approver.id if rec.default_approver else self.env.user.id
+            
+            # 2. Construir el enlace dinámico para la nota de la actividad
+            #base_url = self.get_base_url()
+            #record_url = f"{base_url}/web#id={rec.id}&model={rec._name}&view_type=form"
+            
+            # 3. Crear la actividad
+            self.env['mail.activity'].create({
+                'res_id': rec.id,
+                'res_model_id': self.env['ir.model']._get_id(rec._name),
+                'activity_type_id': self.env.ref('mail.mail_activity_data_todo').id, # Tipo: "Por hacer"
+                'summary': f'Revisar registro: {rec.display_name}',
+                'note': f'<p>Por favor, revisa los cambios en este enlace: <a href="{record_url}">Ver Registro</a></p>',
+                'user_id': responsible_user_id,
+                'date_deadline': date.today() # + timedelta(days=2), # Fecha límite (ej. en 2 días)
+            }) 
         return
 
     def action_approve(self):
@@ -376,12 +443,12 @@ class My_travel_request(models.Model):
                 values['res_id'] = False
                 values['body_html'] = '''
                     <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">
-                        <p>Dear ''' + rec.employee_id.name + ''',</p>
+                        <p>Estimado ''' + rec.employee_id.name + ''',</p>
                         <br/>
-                        <p>Your Travel Request Approved.</p>
-                        <p>Approved By : ''' + self.env.user.name + ''' </p>
+                        <p>Su solicitud de viaje ha sido aprobada.</p>
+                        <p>Aprobado por : ''' + rec.employee_id.name + ''' </p>
                         <br/>
-                        <p>Thank you</p>
+                        <p>Gracias.</p>
                     </div>
                 '''
                 # pdf = self.env.ref('bi_product_low_stock_notification.action_low_stock_report')._render([res.id])[0]
@@ -593,8 +660,8 @@ class My_travel_request(models.Model):
                 r.trip_purpose_id.name if r.trip_purpose_id else "",
                 "+",
                 r.modify_budget or 0,
-                str(r.req_dispersal_date)[:10].replace("-", "") if r.req_dispersal_date else "",
-                str(r.req_return_date)[:10].replace("-", "") if r.req_return_date else "",
+                self._get_user_timezone_date(r.req_dispersal_date) if r.req_dispersal_date else "",
+                self._get_user_timezone_date(r.req_return_date) if r.req_return_date else "",
                 r.phone_no or "",
                 "",
             ])
@@ -636,6 +703,16 @@ class My_travel_request(models.Model):
             "target": "self",
         }
 
+    def _get_user_timezone_date(self, date):
+        user_timezone_str = self.env.user.tz or 'UTC'
+        user_timezone = pytz.timezone(user_timezone_str)
+        if date:
+            date_utc = pytz.utc.localize(date)
+            date_user = date_utc.astimezone(user_timezone)
+            date_user_str = date_user.strftime('%Y-%m-%d')
+            return date_user_str
+        return date
+
     def action_treasury_department_done(self):
         action = self.env['ir.actions.act_window']._for_xml_id('bi_employee_travel_managment.action_read_bank_authorizations')
         return action
@@ -661,7 +738,7 @@ class DownloadAttachmentWizard(models.TransientModel):
         return {
             "type": "ir.actions.act_url",
             "target": "self",   # IMPORTANT
-            "url": f"/bi_employee_travel_managment/download/{attachment_id.id}?filename={self.name}",
+            "url": f"/bi_employee_travel_managment/download/{self.attachment_id.id}?filename={self.name}",
         }
 
     

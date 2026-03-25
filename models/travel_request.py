@@ -35,6 +35,11 @@ class My_travel_request(models.Model):
         return state
     
     name = fields.Char(string="Name", readonly=True)
+    expense_type = fields.Selection([('viaticos', 'Viaticos'), ('general', 'General')], 
+                string="Tipo de Gasto", default='viaticos', 
+                help="Seleccione el tipo de Gasto: Viatico o Gasto en General")
+    parent_id = fields.Many2one('travel.request', string="Viaje Relacionado", index=True, ondelete='cascade')
+
     employee_id = fields.Many2one(
         'hr.employee', 
         string="Employee", 
@@ -709,7 +714,7 @@ class My_travel_request(models.Model):
         if date:
             date_utc = pytz.utc.localize(date)
             date_user = date_utc.astimezone(user_timezone)
-            date_user_str = date_user.strftime('%Y-%m-%d')
+            date_user_str = date_user.strftime('%Y%m%d')
             return date_user_str
         return date
 
@@ -754,7 +759,11 @@ class TravelExpenseLine(models.Model):
     _description = "Travel Expense Line"
 
     travel_exp_id = fields.Many2one('travel.request',string="Travel Expence",readonly=True)
-    product_id = fields.Many2one(comodel_name='product.product',string="Expense Product",domain=[('can_be_expensed', '=', True)],
+    expense_type = fields.Selection(related='travel_exp_id.expense_type', store=True)
+    product_id = fields.Many2one(
+        comodel_name='product.product',
+        string="Expense Product",
+        #domain=[('can_be_expensed', '=', True),('expense_type', '=', expense_type)],
         ondelete='restrict',required=True)
     travel_qty = fields.Float(string="Quantity",default=1)
     travel_amount = fields.Float(string="Amount Calculated", readonly=True, store=True)

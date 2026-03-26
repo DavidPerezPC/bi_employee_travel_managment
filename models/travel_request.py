@@ -727,6 +727,52 @@ class My_travel_request(models.Model):
         #action['context'] = dict(self.env.context or {}, default_travel_request_id=self.id)
         return action
 
+    @api.onchange('parent_id')
+    def _onchange_parent_id(self):
+        if not self.parent_id:
+            return
+
+        # 1. Campos Simples
+        simple_fields = [
+            'account_analytic_id', 'bank_id', 'card_employee_id', 'cheque_number',
+            'company_id', 'czp_company_id', 'czp_zone_id', 'days', 'default_approver',
+            'department_id', 'department_manager_id', 'departure_mode_travel_id',
+            'email', 'employee_id', 'expence_sheet_id', 'expense_type', 'from_city',
+            'from_country_id', 'from_state_id', 'is_manager_user', 'job_id',
+            'journal_id', 'phone_no', 'project_id', 'req_date',
+            'req_travel_mode_id', 'request_by',
+            'return_mode_id', 'return_mode_travel_id', 'ticket_booking_agent_id',
+            'to_city', 'to_country_id', 'to_state_id', 'to_street', 'to_street_2',
+            'to_zip_code', 'travel_type', 'trip_purpose_id', 'visa_agent_id'
+        ]
+        
+        for field in simple_fields:
+            if field in self._fields:
+                self[field] = self.parent_id[field]
+
+        # 2. Lógica de Fechas (+1 día)
+        if self.parent_id.req_return_date:
+            nueva_fecha = self.parent_id.req_return_date + timedelta(days=1)
+            self.req_departure_date = nueva_fecha
+            self.req_dispersal_date = nueva_fecha
+
+        # 3. Campos Many2many
+        m2m_fields = ['czp_zone_ids', 'employee_group_ids', 'exp_account_ids', 'plaza_ids']
+        for field in m2m_fields:
+            if field in self._fields:
+                self[field] = [(6, 0, self.parent_id[field].ids)]
+
+        # 4. Campos One2many (Copia segura con copy_data)
+        # o2m_fields = ['expense_ids', 'rating_ids', 'travel_expense_ids']
+        # for field in o2m_fields:
+        #     if field in self._fields and self.parent_id[field]:
+        #         new_lines = []
+        #         for line in self.parent_id[field]:
+        #             # Obtenemos el diccionario de valores (índice 0)
+        #             line_vals = line.copy_data()[0]
+        #             new_lines.append((0, 0, line_vals))
+        #         self[field] = new_lines
+
 
 # models/download_wizard.py
 from odoo import models, fields, api

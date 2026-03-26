@@ -311,6 +311,7 @@
                 <filter name="approved_state" string="Approved" domain="[('state', '=', 'approved')]" />
                 <filter name="returned_state" string="Returned" domain="[('state', '=', 'returned')]" />
                 <filter name="rejected_state" string="Rejected" domain="[('state', '=', 'rejected')]" />
+                <field name="name"/>
                 <field name="employee_id"/>
                 <field name="czp_company_id"/>
                 <group expand="0" string="Group By">

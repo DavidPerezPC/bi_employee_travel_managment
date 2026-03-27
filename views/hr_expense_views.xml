@@ -34,6 +34,13 @@
 				<field name="payment_mode" position="replace">
 			    	 <field name="payment_mode" widget="radio" readonly="sheet_id or context.get('adv_payment') == True" /> 
 			    </field>
+				<xpath expr="(//header/widget[@name='attach_document'])[1]" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="(//header/widget[@name='attach_document'])[2]" position="attributes">
+					<attribute name="invisible">travel_id == False</attribute>
+				</xpath>
+				
 		    </field>
 		</record>
 
@@ -96,7 +103,11 @@
 									<field name="fecha"/>
 									<field name="rfc_emisor"/>
 									<field name="name"/>
+									<field name="serie"/>
+									<field name="folio"/>
 									<field name="uuid"/>
+									<field name="formapago"/>
+									<field name="metodopago"/>
 									<field name="total" sum="Total XMLs"/>
 								</list>
 							</field>
@@ -113,7 +124,9 @@
 			<field name="arch" type="xml">
 				<field name="sale_order_id" position="replace">
 					<field name="receipt_authorization" readonly="1"/>
+					<field name="cash_withdrawal" readonly="1"/>
 				</field>
+
 				<field name="sale_order_id" position="attributes">
 					<attribute name="invisible">1</attribute>
 				</field>

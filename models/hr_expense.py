@@ -32,11 +32,22 @@ class HrExpense(models.Model):
                                        index=True, 
                                        help="Numero de recibo bancario para este gasto"
                                        )
+    cash_withdrawal = fields.Boolean(string='Retiro de Efectivo',
+                                     compute='_compute_cash_withdrawal',
+                                     help="Indica si este gasto es un retiro de efectivo")
     cfdi_line_ids = fields.One2many('hr.expense.cfdi', 'expense_id', string='Detalles CFDI')
     # Campo computado para ver el UUID principal en la vista de lista si se desea
     l10n_mx_edi_uuid = fields.Char(string='UUID Principal', compute='_compute_main_uuid', store=True)
 
 
+    @api.depends('description')
+    def _compute_cash_withdrawal(self):
+        for rec in self:
+            if rec.description.lower().find('retiro') != -1:
+                rec.cash_withdrawal = True
+            else:
+                rec.cash_withdrawal = False
+    
     @api.onchange('travel_id')
     def onchange_travel_id(self):
         for record in self:
@@ -105,6 +116,10 @@ class HrExpense(models.Model):
             comp = data.get('cfdi:Comprobante', data.get('Comprobante', {}))
             
             # Datos para validación
+            metodopago = comp.get('@MetodoPago')
+            formapago = comp.get('@FormaPago')
+            serie = comp.get('@Serie', False)
+            folio = comp.get('@Folio', False)
             emisor = comp.get('cfdi:Emisor', {}).get('@Rfc')
             receptor = comp.get('cfdi:Receptor', {}).get('@Rfc')
             total = comp.get('@Total')
@@ -124,6 +139,12 @@ class HrExpense(models.Model):
             # Si el gasto tiene un RFC Emisor, entonces el CFDI debe coincidir con el RFC del proveedor seleccionado en el gasto            
             if self.vat and emisor and emisor != self.vat:
                 raise ValidationError(_("El RFC Emisor del CFDI (%s) no coincide con el RFC del gasto (%s).") % (emisor, self.vat))
+            #SI FUE UN RETIRO, LA FORMA DE PAGO DEBE SER EFECTIVO
+            if self.cash_withdrawal and formapago != '01':
+                raise ValidationError(_("Para gastos de retiro de efectivo, la Forma de Pago del CFDI debe ser '01' (Efectivo)."))
+            
+            if not self.cash_withdrawal and formapago not in ['04', '28', '29']:
+                raise ValidationError(_("Para gastos que no son retiros de efectivo, la Forma de Pago del CFDI debe ser '04' (Tarjeta de Débito), '28' (Tarjeta de Crédito) o '29' (Tarjeta de Servicios)."))
             # 2. PROCESAMIENTO ESTÁNDAR (Lo que ya teníamos)
 
             self.env['hr.expense.cfdi'].create({
@@ -133,6 +154,10 @@ class HrExpense(models.Model):
                 'uuid': uuid,
                 'total': float(total),
                 'fecha': comp.get('@Fecha', '')[:10],
+                'serie': serie,
+                'folio': folio,
+                'metodopago': metodopago,
+                'formapago': formapago,
                 'xml_file': attach.datas,
                 'xml_filename': attach.name,
             })
@@ -193,6 +218,12 @@ class HrExpenseCFDI(models.Model):
     uuid = fields.Char('UUID', index=True)
     total = fields.Float('Total XML')
     fecha = fields.Date('Fecha Emisión')
+    serie = fields.Char('Serie', help="Serie del CFDI, si está disponible")
+    folio = fields.Char('Folio', index=True, help="Folio del CFDI, si está disponible")
+    metodopago = fields.Char('Método de Pago', help="Método de pago del CFDI")
+    formapago = fields.Char('Forma de Pago', help="Forma de pago del CFDI")
+
+
     
     # NUEVOS CAMPOS DE ESTATUS SAT
     l10n_mx_edi_sat_status = fields.Selection([

@@ -27,9 +27,9 @@ class BankAuthorizationWizard(models.TransientModel):
             file_content = []
             for row in csv_reader:
                 cheque_number = row[1]
-                daparture_date = row[10]
+                departure_date = row[10]
                 travel = travels.filtered(lambda t: t.cheque_number == cheque_number \
-                                          and t.req_dispersal_date.strftime('%d%m%Y') == daparture_date)
+                                          and t.req_dispersal_date.strftime('%d%m%Y') == departure_date)
                 if travel and row[16] == 'Aplicado' and row[19] == 'CORRECTO':
                     if len(travel) > 1:
                         # Handle case where multiple travels match

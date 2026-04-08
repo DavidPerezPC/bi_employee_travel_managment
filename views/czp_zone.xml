@@ -45,7 +45,7 @@
                     </group>
                     <group>
                         <group>
-                            <field name="budget_ids" context="{'default_czp_zone_id': id}">
+                            <field name="budget_ids" context="{'default_czp_zone_id': id}" groups="bi_employee_travel_managment.hr_travel_manager_id">
                                 <list editable="bottom">
                                     <field name="categ_id"/>
                                     <field name="min_amount" widget="monetary"/>

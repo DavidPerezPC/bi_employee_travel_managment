@@ -168,6 +168,7 @@ class HrExpense(models.Model):
         except ValidationError as e:
             raise e
         except Exception as e:
+            raise UserError(_("Error al procesar el CFDI XML: %s") % str(e))
             pass
 
     def _update_expense_totals(self, comp):

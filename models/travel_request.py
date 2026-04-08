@@ -65,7 +65,9 @@ class My_travel_request(models.Model):
     czp_zone_ids = fields.Many2many('czp.zone', 
                                     string="Visit Zones", 
                                     help="Zones to visit associated with the travel request",
-                                    readonly=True)
+                                    readonly=True,
+                                    store=True,
+                                    force_save=True)
     czp_zone_id = fields.Many2one('czp.zone', string="Budget Zone", required=True)
     #plaza_id = fields.Many2one('czp.plazas', 
     #                           string="Plaza",

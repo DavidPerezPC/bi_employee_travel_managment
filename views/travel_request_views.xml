@@ -142,7 +142,7 @@
                             <field name="plaza_ids" readonly="state != 'draft'" widget="many2many_tags"/>
                             <!--field name="plaza_id" readonly="state != 'draft'" 
                                 help="Plaza associated with the travel request to pickup the Zone"/--> 
-                            <field name="czp_zone_ids" readonly="1" widget="many2many_tags"/>   
+                            <field name="czp_zone_ids" readonly="1" widget="many2many_tags" force_save="1"/>   
                             <field name="czp_zone_id" readonly="state != 'draft'" domain="plaza_domain"/>
                         </group>
                         <group>

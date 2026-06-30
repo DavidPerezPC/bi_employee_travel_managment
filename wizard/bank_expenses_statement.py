@@ -80,10 +80,11 @@ class BankAuthorizationWizard(models.TransientModel):
                                 ]):
                     continue
 
-                travel = travels.filtered(lambda t: t.cheque_number == card \
-                                          and date >= t.req_dispersal_date.date()  \
-                                          and date <= t.req_return_date.date()
-                                          )
+                travel = travels.filtered(lambda t: t.cheque_number == card).sorted(lambda t: t.name, reverse=True)
+                # travel = travels.filtered(lambda t: t.cheque_number == card \
+                #                           and date >= t.req_dispersal_date.date()  \
+                #                           and date <= t.req_return_date.date()
+                #                           ).sorted(lambda t: t.name, reverse=True)
                 if len(travel) > 1:
                     # Handle case where multiple travels match
                     travel = travel[0]  # or some other logic

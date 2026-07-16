@@ -314,6 +314,7 @@
                 <field name="name"/>
                 <field name="employee_id"/>
                 <field name="czp_company_id"/>
+                <field name="cheque_number"/>
                 <group expand="0" string="Group By">
                     <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
                     <filter name="czp_company_id" string="Company" context="{'group_by': 'czp_company_id'}"/>

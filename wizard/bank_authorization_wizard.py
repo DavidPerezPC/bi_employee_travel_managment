@@ -12,7 +12,7 @@ class BankAuthorizationWizard(models.TransientModel):
     file_name = fields.Char(string='File Name')
 
     def action_bank_authorization_transfer(self):
-        travels = self.env['travel.request'].search([('state', '=', 'treasury_department')])
+        travels = self.env['travel.request'].search([('state', 'in', ['treasury_department','approved'])])
         if self.file_upload:
             # Decode the base64 data to bytes
             binary_data = base64.b64decode(self.file_upload)
@@ -28,9 +28,14 @@ class BankAuthorizationWizard(models.TransientModel):
             for row in csv_reader:
                 cheque_number = row[1]
                 departure_date = row[10]
-                travel = travels.filtered(lambda t: t.cheque_number == cheque_number \
-                                          and t.req_dispersal_date.strftime('%d%m%Y') == departure_date)
-                if travel and row[16] == 'Aplicado' and row[19] == 'CORRECTO':
+                if len(row) < 20 or row[16] != 'Aplicado' or row[19] != 'CORRECTO':
+                    continue
+                departure_date = datetime.strftime(datetime.strptime(departure_date, "%d%m%Y"),"%Y%m%d")
+                #travel = travels.filtered(lambda t: t.cheque_number == cheque_number )
+                travel = travels.filtered(lambda t: t.cheque_number == cheque_number and not t.bank_authorization \
+                                          and t.req_dispersal_date.strftime('%Y%m%d') <= departure_date <= t.req_return_date.strftime('%Y%m%d')  )
+                # if travel and row[16] == 'Aplicado' and row[19] == 'CORRECTO':
+                if travel:
                     if len(travel) > 1:
                         # Handle case where multiple travels match
                         travel = travel[0]  # or some other logic   
